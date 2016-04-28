@@ -225,16 +225,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
 
       
     </ul>
@@ -375,7 +365,7 @@
 <p>  <a href="https://uranusjr.com/work/" target="_blank" rel="external">MarkDown</a></p>
 </li>
 <li><p>在MarkDown中，插入超链接(网址、邮箱等)时，只需要将超链接用&lt;&gt;包括起来即可，例如：</p>
-<p>  <a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#x31;&#50;&#x33;&#x34;&#x35;&#54;&#x37;&#x38;&#57;&#x40;&#49;&#x36;&#51;&#46;&#99;&#111;&#109;">&#x31;&#50;&#x33;&#x34;&#x35;&#54;&#x37;&#x38;&#57;&#x40;&#49;&#x36;&#51;&#46;&#99;&#111;&#109;</a></p>
+<p>  <a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#x31;&#50;&#x33;&#x34;&#x35;&#x36;&#55;&#56;&#x39;&#64;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;">&#x31;&#50;&#x33;&#x34;&#x35;&#x36;&#55;&#56;&#x39;&#64;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;</a></p>
 <p>  <a href="http://www.jianshu.com" target="_blank" rel="external">http://www.jianshu.com</a></p>
 </li>
 </ul>
@@ -463,17 +453,28 @@
     <div>
       
         
-<div id="wechat_subscriber" style="display: block； padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="/path/to/your/wechatqcode ex. /uploads/wechat-qcode.jpg" alt="东折 wechat" style="width: 200px; max-width: 100%;"/>
-    <div>hello ex. subscribe to my blog by scanning my public wechat account</div>
-</div>
-
       
     </div>
 
     <div>
       
         
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>如果觉得写的不错，那就打赏一下吧！</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/weixin.png" alt="东折 WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+  </div>
+</div>
+
       
     </div>
 
@@ -561,7 +562,7 @@
                src="/uploads/avatar.png"
                alt="东折" />
           <p class="site-author-name" itemprop="name">东折</p>
-          <p class="site-description motion-element" itemprop="description">welcome to my blog</p>
+          <p class="site-description motion-element" itemprop="description">以出以入，以就鲜絜，似善化。其万折也必东，似志。是故君子见大水必观焉。 --  荀子·宥坐</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
