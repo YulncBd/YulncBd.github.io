@@ -90,21 +90,21 @@
 <meta property="og:description" content="第一次接触内购，网上搜了很多资料，大多数都是讲的基本的用法，不能用来处理一些特殊情况，但是我们需要解决的往往都是一些特殊情况。经过一段时间的努力和时间，终于大体了解了内购的基本流程，这里整理一下内购的代码，以便以后使用或他人借鉴。
 准备部分没有开发者帐号以及证书没有配置好的请自行百度配置。
 创建一个 AppID 和 BoundleID进入苹果的Apple Developer 创建一个 AppID">
-<meta property="og:image" content="http://yoursite.com/Users/DongZ/blog/source/uploads/AppID.png">
-<meta property="og:image" content="http://yoursite.com/Users/DongZ/blog/source/uploads/App Services.png">
-<meta property="og:image" content="http://yoursite.com/Users/DongZ/blog/source/uploads/AppCreate.png">
-<meta property="og:image" content="http://yoursite.com/Users/DongZ/blog/source/uploads/内购类型.png">
-<meta property="og:image" content="http://yoursite.com/Users/DongZ/blog/source/uploads/内购摘要1.png">
-<meta property="og:image" content="http://yoursite.com/Users/DongZ/blog/source/uploads/内购摘要2.png">
-<meta property="og:image" content="http://yoursite.com/Users/DongZ/blog/source/uploads/测试帐号.png">
-<meta property="og:image" content="http://yoursite.com/Users/DongZ/blog/source/uploads/内购.jpg">
-<meta property="og:updated_time" content="2016-05-09T02:49:49.000Z">
+<meta property="og:image" content="http://img2.ph.126.net/PHbMEsByXbQlbE0Mhl8c4w==/1998472334747494370.png">
+<meta property="og:image" content="http://img0.ph.126.net/m9OGzhRpudMDV93Xt3j0dA==/6598061526206718111.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/cut-LzCmQQFq0EEXEvJcTA==/6598175875415825922.jpg">
+<meta property="og:image" content="http://img1.ph.126.net/hqxC0_wml4cGOGcUw6RZsQ==/6598202263694892499.jpg">
+<meta property="og:image" content="http://img1.ph.126.net/fysaS4F0T-wJmb2BVVmpkA==/3756002089328009485.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/Rjxx7L3gWuFtXk3ItI_Nlw==/4860509897940868893.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/NCl3SRrwWzgF3rzCb-WUZQ==/6598193467601866965.jpg">
+<meta property="og:image" content="http://img1.ph.126.net/ldHXIWZdgXmOk9iFK1Vfvg==/6598149487136756941.jpg">
+<meta property="og:updated_time" content="2016-05-09T03:14:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="apple 内购流程梳理">
 <meta name="twitter:description" content="第一次接触内购，网上搜了很多资料，大多数都是讲的基本的用法，不能用来处理一些特殊情况，但是我们需要解决的往往都是一些特殊情况。经过一段时间的努力和时间，终于大体了解了内购的基本流程，这里整理一下内购的代码，以便以后使用或他人借鉴。
 准备部分没有开发者帐号以及证书没有配置好的请自行百度配置。
 创建一个 AppID 和 BoundleID进入苹果的Apple Developer 创建一个 AppID">
-<meta name="twitter:image" content="http://yoursite.com/Users/DongZ/blog/source/uploads/AppID.png">
+<meta name="twitter:image" content="http://img2.ph.126.net/PHbMEsByXbQlbE0Mhl8c4w==/1998472334747494370.png">
 
 
 
@@ -321,26 +321,26 @@
         <p>第一次接触内购，网上搜了很多资料，大多数都是讲的基本的用法，不能用来处理一些特殊情况，但是我们需要解决的往往都是一些特殊情况。经过一段时间的努力和时间，终于大体了解了内购的基本流程，这里整理一下内购的代码，以便以后使用或他人借鉴。</p>
 <h2 id="准备部分"><a href="#准备部分" class="headerlink" title="准备部分"></a>准备部分</h2><p>没有开发者帐号以及证书没有配置好的请自行百度配置。</p>
 <h3 id="创建一个-AppID-和-BoundleID"><a href="#创建一个-AppID-和-BoundleID" class="headerlink" title="创建一个 AppID 和 BoundleID"></a>创建一个 AppID 和 BoundleID</h3><p>进入苹果的<a href="https://developer.apple.com" target="_blank" rel="external">Apple Developer</a> 创建一个 AppID 和 BoundleID， 进入开发者中心后，点击 <code>Account</code> 选项 ，在点击 <code>Certificates, IDs &amp; Profiles</code> ，在点击 <code>App IDs</code>  如图</p>
-<p><img src="/Users/DongZ/blog/source/uploads/AppID.png" alt=""></p>
+<p><img src="http://img2.ph.126.net/PHbMEsByXbQlbE0Mhl8c4w==/1998472334747494370.png" alt=""></p>
 <p> 最后点击页面上的加号创建AppID（AppID 和 BoundleID 的命名按照苹果的要求来就好了，最后选择需要的服务，要勾选上内购）。</p>
-<p><img src="/Users/DongZ/blog/source/uploads/App Services.png" alt=""></p>
+<p><img src="http://img0.ph.126.net/m9OGzhRpudMDV93Xt3j0dA==/6598061526206718111.jpg" alt=""></p>
 <h3 id="新建一个-App-应用"><a href="#新建一个-App-应用" class="headerlink" title="新建一个 App 应用"></a>新建一个 App 应用</h3><p>进入苹果的<a href="https://itunesconnect.apple.com" target="_blank" rel="external">itunes Connect</a>，登录后点击 <code>我的 App</code> 然后创建一个新的应用，如图</p>
-<p><img src="/Users/DongZ/blog/source/uploads/AppCreate.png" alt=""></p>
+<p><img src="http://img0.ph.126.net/cut-LzCmQQFq0EEXEvJcTA==/6598175875415825922.jpg" alt=""></p>
 <p>按照要求填写上面申请好的AppID 和 BoundleID，填写好以后，点击 <code>创建</code> 就有一个新应用了。</p>
 <h3 id="添加付费项目"><a href="#添加付费项目" class="headerlink" title="添加付费项目"></a>添加付费项目</h3><p>点击添加的应用，进入下一个页面后点击 <code>功能</code>，然后添加 App 内购项目如图</p>
-<p><img src="/Users/DongZ/blog/source/uploads/内购类型.png" alt=""></p>
+<p><img src="http://img1.ph.126.net/hqxC0_wml4cGOGcUw6RZsQ==/6598202263694892499.jpg" alt=""></p>
 <p>一般都是消耗型项目吧，这里我选择的是消耗型项目。</p>
 <p>然后是填写具体的内购信息，不知道该填什么的可以随便填一些信息，看看效果，如图</p>
-<p><img src="/Users/DongZ/blog/source/uploads/内购摘要1.png" alt=""></p>
-<p><img src="/Users/DongZ/blog/source/uploads/内购摘要2.png" alt=""></p>
+<p><img src="http://img1.ph.126.net/fysaS4F0T-wJmb2BVVmpkA==/3756002089328009485.jpg" alt=""></p>
+<p><img src="http://img0.ph.126.net/Rjxx7L3gWuFtXk3ItI_Nlw==/4860509897940868893.jpg" alt=""></p>
 <p>测试的时候照片可以不上串，产品Id 是唯一的（比较重要）。</p>
 <h3 id="添加测试账户"><a href="#添加测试账户" class="headerlink" title="添加测试账户"></a>添加测试账户</h3><p>总不能用正式帐号去测试吧，那样要花好多钱的，这里我们用测试帐号去测试内购流程。</p>
 <p>进入苹果的<a href="https://itunesconnect.apple.com" target="_blank" rel="external">itunes Connect</a>，登录后点击 <code>用户和职能</code> 然后在点击 <code>沙箱技术测试员</code>，最后添加测试帐号，如图</p>
-<p><img src="/Users/DongZ/blog/source/uploads/测试帐号.png" alt=""></p>
+<p><img src="http://img0.ph.126.net/NCl3SRrwWzgF3rzCb-WUZQ==/6598193467601866965.jpg" alt=""></p>
 <p>这里的邮箱可以随便填写，不用去验证，填完后准备工作就完成了。</p>
 <p>最后，注意一下测试内购时，把 App Store 里的正式帐号注销掉，并且不要用测试帐号去登录 App Store。</p>
 <h2 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h2><p>在正式编码前，我们先来了解一下内购的大体流程，请看图</p>
-<p><img src="/Users/DongZ/blog/source/uploads/内购.jpg" alt=""></p>
+<p><img src="http://img1.ph.126.net/ldHXIWZdgXmOk9iFK1Vfvg==/6598149487136756941.jpg" alt=""></p>
 <p>这是从网上找的一张图，很清楚的描述了内购的流程，下面的代码我会按照这张图的流程来进行。</p>
 <h3 id="在工程里导入storekit-framework，在内购类导入-import"><a href="#在工程里导入storekit-framework，在内购类导入-import" class="headerlink" title="在工程里导入storekit.framework，在内购类导入#import \"></a>在工程里导入storekit.framework，在内购类导入#import \<storekit storekit.h\=""></storekit></h3><h3 id="客户端代码"><a href="#客户端代码" class="headerlink" title="客户端代码"></a>客户端代码</h3><p><strong>.h文件</strong></p>
 <pre><code>//
@@ -701,8 +701,8 @@ static StoreAPI *storeAPI = nil;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/25/模板/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/04/25/hexo 安装与配置/" rel="next" title="hexo 安装与配置">
+                <i class="fa fa-chevron-left"></i> hexo 安装与配置
               </a>
             
           </div>
