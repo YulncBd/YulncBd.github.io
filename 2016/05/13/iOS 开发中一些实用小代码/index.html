@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="MarkDown,MacDown," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -80,42 +80,34 @@
 
 
 
-<meta name="description" content="Created by dongzhe on the eighth day of April 2016
-标题在MarkDown中，你只需要在文本前面加上#即可。同理，你可以增加二级标题、三级标题、四级标题、五级标题、六级标题，总共六级，只需增加#即可。标题字号相应降低，例如：
-#一级标题
-##二级标题
-###三级标题
-####四级标题
-#####五级标题
-######六级标题
-注：#和「一级标题」之">
+<meta name="description" content="本文介绍了 iOS 实际开发过程中的一些实用代码段。 
+代码段添加 pch 文件pre-Compile Header（预编译头文件），一般存放一些使用频率较高的代码或文件。尽量不要存放太多内容，如果预编译的代码太多的话，会增加程序的启动时间。
+Command + N 打开新建文件窗口，选择 iOS –&amp;gt; Other –&amp;gt; PCH File 创建 pch 文件，如图：
+
+点击 Next">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MacDown中MarkDown的使用规范总结">
-<meta property="og:url" content="http://yoursite.com/2016/04/08/MacDown 使用说明/index.html">
+<meta property="og:title" content="iOS 开发中一些实用小代码">
+<meta property="og:url" content="http://yoursite.com/2016/05/13/iOS 开发中一些实用小代码/index.html">
 <meta property="og:site_name" content="Try、Try Again！The worst result is failure!">
-<meta property="og:description" content="Created by dongzhe on the eighth day of April 2016
-标题在MarkDown中，你只需要在文本前面加上#即可。同理，你可以增加二级标题、三级标题、四级标题、五级标题、六级标题，总共六级，只需增加#即可。标题字号相应降低，例如：
-#一级标题
-##二级标题
-###三级标题
-####四级标题
-#####五级标题
-######六级标题
-注：#和「一级标题」之">
-<meta property="og:image" content="http://macdown.uranusjr.com/static/base/img/logo.png">
-<meta property="og:updated_time" content="2016-05-12T02:55:49.000Z">
+<meta property="og:description" content="本文介绍了 iOS 实际开发过程中的一些实用代码段。 
+代码段添加 pch 文件pre-Compile Header（预编译头文件），一般存放一些使用频率较高的代码或文件。尽量不要存放太多内容，如果预编译的代码太多的话，会增加程序的启动时间。
+Command + N 打开新建文件窗口，选择 iOS –&amp;gt; Other –&amp;gt; PCH File 创建 pch 文件，如图：
+
+点击 Next">
+<meta property="og:image" content="http://img1.ph.126.net/TWHKIs7KOKEVYrH0OUN6RA==/4900479344633179915.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/zmtb-Jx9rg0IPZhKeOMFBQ==/6598164880299623877.png">
+<meta property="og:image" content="http://img0.ph.126.net/z6EzTBPi-Eb8_1SolLq7IQ==/1623829140745544649.jpg">
+<meta property="og:image" content="http://img1.ph.126.net/9L6HSoGb2bNFQuVtxmmcQA==/4872331846962121723.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/Jee22sslSfqPm6sSag5y6g==/4849532373849192267.jpg">
+<meta property="og:updated_time" content="2016-05-18T07:18:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MacDown中MarkDown的使用规范总结">
-<meta name="twitter:description" content="Created by dongzhe on the eighth day of April 2016
-标题在MarkDown中，你只需要在文本前面加上#即可。同理，你可以增加二级标题、三级标题、四级标题、五级标题、六级标题，总共六级，只需增加#即可。标题字号相应降低，例如：
-#一级标题
-##二级标题
-###三级标题
-####四级标题
-#####五级标题
-######六级标题
-注：#和「一级标题」之">
-<meta name="twitter:image" content="http://macdown.uranusjr.com/static/base/img/logo.png">
+<meta name="twitter:title" content="iOS 开发中一些实用小代码">
+<meta name="twitter:description" content="本文介绍了 iOS 实际开发过程中的一些实用代码段。 
+代码段添加 pch 文件pre-Compile Header（预编译头文件），一般存放一些使用频率较高的代码或文件。尽量不要存放太多内容，如果预编译的代码太多的话，会增加程序的启动时间。
+Command + N 打开新建文件窗口，选择 iOS –&amp;gt; Other –&amp;gt; PCH File 创建 pch 文件，如图：
+
+点击 Next">
+<meta name="twitter:image" content="http://img1.ph.126.net/TWHKIs7KOKEVYrH0OUN6RA==/4900479344633179915.jpg">
 
 
 
@@ -133,7 +125,7 @@
   };
 </script>
 
-  <title> MacDown中MarkDown的使用规范总结 | Try、Try Again！The worst result is failure! </title>
+  <title> iOS 开发中一些实用小代码 | Try、Try Again！The worst result is failure! </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +255,7 @@
             
             
               
-                MacDown中MarkDown的使用规范总结
+                iOS 开发中一些实用小代码
               
             
           </h1>
@@ -275,8 +267,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-08T00:00:00+08:00" content="2016-04-08">
-              2016-04-08
+            <time itemprop="dateCreated" datetime="2016-05-13T00:00:00+08:00" content="2016-05-13">
+              2016-05-13
             </time>
           </span>
 
@@ -289,8 +281,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -305,8 +297,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/08/MacDown 使用说明/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/08/MacDown 使用说明/" itemprop="commentsCount"></span>
+                <a href="/2016/05/13/iOS 开发中一些实用小代码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/13/iOS 开发中一些实用小代码/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -329,133 +321,28 @@
       
 
       
-        <p><strong>Created by dongzhe on the eighth day of April 2016</strong></p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>在MarkDown中，你只需要在文本前面加上#即可。同理，你可以增加二级标题、三级标题、四级标题、五级标题、六级标题，总共六级，只需增加#即可。标题字号相应降低，例如：</p>
-<pre><code>#一级标题
-##二级标题
-###三级标题
-####四级标题
-#####五级标题
-######六级标题
-</code></pre><p>注：#和「一级标题」之间建议保留一个字符的空格，这是最标准的MarkDown写法</p>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ul>
-<li><p>在MarkDown中，你只需要在文字卡面加上-或+就可以了，例如：</p>
-<pre><code>- 文本一
-- 文本二
-- 文本三
-</code></pre></li>
-<li><p>如果你希望有序列表，在文字前面加上1. 2. 3. 就可以了，例如：</p>
-<pre><code>1. 文本一
-2. 文本二
-3. 文本三
-</code></pre></li>
-<li><p>效果如下(前面的&gt;符号表示引用),如果「- 文本」不是放在行首，显示的就是空心圆 ：</p>
-<blockquote>
-<ul>
-<li>文本一</li>
-<li>文本二</li>
-<li>文本三</li>
-</ul>
-<ol>
-<li>文本一</li>
-<li>文本二</li>
-<li>文本三</li>
-</ol>
-</blockquote>
-</li>
-</ul>
-<p>注：-和1. 和文本之间保留一个空格，但是后面要跟代码时，代码需要两个制表符(Tab)或8个空格，才能正常显示。</p>
-<h2 id="链接、超链接、图片和代码"><a href="#链接、超链接、图片和代码" class="headerlink" title="链接、超链接、图片和代码"></a>链接、超链接、图片和代码</h2><ul>
-<li><p>在MarkDown中，插入链接时，只需要使用 [使用文本](链接地址)这样的语法就可以，例如：</p>
-<p>  <a href="https://uranusjr.com/work/" target="_blank" rel="external">MarkDown</a></p>
-</li>
-<li><p>在MarkDown中，插入超链接(网址、邮箱等)时，只需要将超链接用&lt;&gt;包括起来即可，例如：</p>
-<p>  <a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x31;&#x32;&#x33;&#x34;&#x35;&#x36;&#x37;&#56;&#x39;&#x40;&#49;&#54;&#x33;&#46;&#99;&#x6f;&#109;">&#x31;&#x32;&#x33;&#x34;&#x35;&#x36;&#x37;&#56;&#x39;&#x40;&#49;&#54;&#x33;&#46;&#99;&#x6f;&#109;</a></p>
-<p>  <a href="http://www.jianshu.com" target="_blank" rel="external">http://www.jianshu.com</a></p>
-</li>
-</ul>
-<ul>
-<li><p>在MarkDown中，插入图片时，只需要使用![](图片链接地址)这样的语法就可以，例如：<br>  <img src="http://macdown.uranusjr.com/static/base/img/logo.png" alt=""></p>
-</li>
-<li><p>在MarkDown中，建立代码区块，只要在文本前添加制表符或者4个空格就可以，例如：</p>
-<pre><code>- (void)hello
-{
-      nslog(@&quot;hello world&quot;);
-}
-</code></pre></li>
-</ul>
-<p>注：插入图片的语法和链接的语法很像，只是前面多了一个 !。这里的[],(),!符号都是英文符号。</p>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>格式如下：</p>
-<ul>
-<li><p>行名居中，数据居左</p>
-<p>  | Tables        | Are           |  Cool   |<br>  | —— |——-| —–|<br>  | col 3 is      | right-aligned | $1600 |<br>  | col 2 is      | centered      |   $12 |<br>  | zebra stripes | are neat     |    $1  |</p>
-<pre><code>[^emphasize]
-</code></pre></li>
-<li><p>行名居中，数据居中</p>
-<p>  | Tables        | Are           |  Cool   |<br>  | :—–: |:——-:| :—–:|<br>  | col 3 is      | right-aligned | $1600 |<br>  | col 2 is      | centered      |   $12 |<br>  | zebra stripes | are neat     |    $1  |</p>
-</li>
-<li><p>行名居左，数据居左</p>
-<p>  | Tables        | Are           |  Cool   |<br>  | :—— |:——-| :—–|<br>  | col 3 is      | right-aligned | $1600 |<br>  | col 2 is      | centered      |   $12 |<br>  | zebra stripes | are neat     |    $1  |</p>
-</li>
-<li><p>行名居右，数据居右</p>
-<p>  | Tables        | Are           |  Cool   |<br>  | ——: |——-:| —–:|<br>  | col 3 is      | right-aligned | $1600 |<br>  | col 2 is      | centered      |   $12 |<br>  | zebra stripes | are neat     |    $1  |</p>
-</li>
-</ul>
-<p>注：两边的竖线可有可无，但是要有都有，要无都无。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li><p>回车</p>
-<blockquote>
-<p>一个回车表示换行</p>
-<p>两个回车表示换段</p>
-</blockquote>
-</li>
-<li><p>引用</p>
-<p>  在Markdown中你只需要在你希望引用的文字前面添加&gt;就可以，例如：</p>
-<blockquote>
-<p>一盏灯，一片黄昏；</p>
-</blockquote>
-<p>  注：&gt; 和 文本之间建议保留一个空格</p>
-</li>
-<li><p>粗体与斜体</p>
-<p>  在MarkDown中，用两个<em>包含一段文字就是粗体，用一个</em>包含一段文字就是斜体，例如：</p>
-<pre><code>**粗体**
-
-*斜体*
-
-***粗斜体***
-</code></pre></li>
-</ul>
-<ul>
-<li><p>横线</p>
-<p>  三个星号或者三个减号或者三个下划线即可生成一条虚横线，例如：</p>
-<pre><code>***
----
-___
-</code></pre><p>  一个减号或两个减号，可以生成一条实横线，例如：</p>
-<pre><code>-
---
-</code></pre></li>
-<li><p>删除线</p>
-</li>
-</ul>
-<ul>
-<li><p>文本突出显示</p>
-<p>  只需要用``将文本包含起来，即可。例如：</p>
-<p>  <code>突出显示文本</code></p>
-</li>
-<li><p>文本注释</p>
-<p>  只需使用[^注释]这样的格式，就可以，但是要在文章最后面也要有相同的[^注释]去解释相应的内容，例如：</p>
-<pre><code>[^hello]
-</code></pre></li>
-<li><p>特殊符号</p>
-<p>  文本中需要插入特殊符号时，需要在特殊符号前加上反斜杠，例如：</p>
-<p>  #hello</p>
-<p>  注：这里的特殊符号并不只是只单一的特殊符号，而是当特殊符号与文本或特殊符号组合形成特殊的格式时，如果需要显示特殊符号，需要加上\。如上面的#与hello组合会将hello显示为标题，如果此时需要显示#hello，需要在#前添加\。</p>
-</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上的语法只是MarkDown的基本语法，在实际使用中往往是多个语法混合使用，具体的规则要在具体的使用中去体会。个人觉得用MarkDown来记笔记要比使用简单地文本方便得多，而且写出的东西也更加易读。</p>
-<p>Okey，happy writing！</p>
-
+        <p>本文介绍了 iOS 实际开发过程中的一些实用代码段。 </p>
+<h2 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a>代码段</h2><h3 id="添加-pch-文件"><a href="#添加-pch-文件" class="headerlink" title="添加 pch 文件"></a>添加 pch 文件</h3><p>pre-Compile Header（预编译头文件），一般存放一些使用频率较高的代码或文件。尽量不要存放太多内容，如果预编译的代码太多的话，会增加程序的启动时间。</p>
+<p>Command + N 打开新建文件窗口，选择 iOS –&gt; Other –&gt; PCH File 创建 pch 文件，如图：</p>
+<p><img src="http://img1.ph.126.net/TWHKIs7KOKEVYrH0OUN6RA==/4900479344633179915.jpg" alt=""></p>
+<p>点击 <code>Next</code></p>
+<p><img src="http://img0.ph.126.net/zmtb-Jx9rg0IPZhKeOMFBQ==/6598164880299623877.png" alt=""></p>
+<p>点击 <code>Create</code></p>
+<p>PCH 文件创建好之后需要配置一下，如图：</p>
+<p><img src="http://img0.ph.126.net/z6EzTBPi-Eb8_1SolLq7IQ==/1623829140745544649.jpg" alt=""></p>
+<p>将图片中的 <code>Precompile Prefix Header</code> 右边的NO改为Yes。预编译后的pch文件会被缓存起来，可以提高编译速度。</p>
+<p>同时编辑 <code>Prefix Header</code> ，如图：</p>
+<p><img src="http://img1.ph.126.net/9L6HSoGb2bNFQuVtxmmcQA==/4872331846962121723.jpg" alt=""></p>
+<p>这是相对路径的写法，<code>pch</code>指的是项目名，<code>pch.pch</code>指的是项目中pch文件的文件名和后缀。</p>
+<p>到这里 PCH 文件已经创建并配置完成，最后一步是把需要预编译的代码放到 <code>pch.pch</code> 中，如图：</p>
+<p><img src="http://img0.ph.126.net/Jee22sslSfqPm6sSag5y6g==/4849532373849192267.jpg" alt=""></p>
+<p>这里我设置了两个宏定义(屏幕宽和屏幕高)并引入了一个<code>Common.h</code>的头文件。</p>
+<p>然后你就发现 kSCREEN_WIDTH 和 kSCREEN_HEIGHT 变成全局的了。</p>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// 验证邮箱</span><br><span class="line">+ (BOOL)validateEmail:(NSString *)email</span><br><span class="line">&#123;</span><br><span class="line">    NSString *pattern = @<span class="string">"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]&#123;2,4&#125;"</span>;</span><br><span class="line">    NSPredicate *pred = [NSPredicate predicateWithFormat:@<span class="string">"SELF MATCHES %@"</span>, pattern];</span><br><span class="line">    BOOL isMatch = [pred evaluateWithObject:email];</span><br><span class="line">    <span class="built_in">return</span> isMatch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 验证手机号</span><br><span class="line">+ (BOOL)validateMobile:(NSString *)mobile</span><br><span class="line">&#123;</span><br><span class="line">    // 以1开头，第二位是3，5，7，8的11位整数</span><br><span class="line">    NSString *pattern = @<span class="string">"^1[3578]\\d&#123;9&#125;$"</span>;</span><br><span class="line">    NSPredicate *pred = [NSPredicate predicateWithFormat:@<span class="string">"SELF MATCHES %@"</span>, pattern];</span><br><span class="line">    BOOL isMatch = [pred evaluateWithObject:mobile];</span><br><span class="line">    <span class="built_in">return</span> isMatch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 验证用户名</span><br><span class="line">+ (BOOL)validateNickName:(NSString *)userName</span><br><span class="line">&#123;</span><br><span class="line">    //2-10个中英文、数字和下划线</span><br><span class="line">    //NSString *pattern = @<span class="string">"[\u4e00-\u9fa5_a-zA-Z0-9]&#123;2,10&#125;"</span>;</span><br><span class="line">    //  \S匹配任意可见字符</span><br><span class="line">    NSString *pattern = @<span class="string">"\\S&#123;0,10&#125;"</span>;</span><br><span class="line">    NSPredicate *pred = [NSPredicate predicateWithFormat:@<span class="string">"SELF MATCHES %@"</span>, pattern];</span><br><span class="line">    BOOL isMatch = [pred evaluateWithObject:userName];</span><br><span class="line">    <span class="built_in">return</span> isMatch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 验证密码</span><br><span class="line">+ (BOOL)validatePassword:(NSString *)password</span><br><span class="line">&#123;</span><br><span class="line">    //6-20位的数字字母组合-- ^表示已...开头，$表示已...结尾</span><br><span class="line">    NSString *pattern = @<span class="string">"^[a-zA-Z0-9]&#123;6,18&#125;+$"</span>;</span><br><span class="line">    NSPredicate *pred = [NSPredicate predicateWithFormat:@<span class="string">"SELF MATCHES %@"</span>, pattern];</span><br><span class="line">    BOOL isMatch = [pred evaluateWithObject:password];</span><br><span class="line">    <span class="built_in">return</span> isMatch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考网站：<a href="http://blog.csdn.net/chaoyuan899/article/details/38583759" target="_blank" rel="external">IOS常用正则表达式 </a></p>
+<h3 id="点击状态栏不返回顶部问题"><a href="#点击状态栏不返回顶部问题" class="headerlink" title="点击状态栏不返回顶部问题"></a>点击状态栏不返回顶部问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic) BOOL  scrollsToTop __TVOS_PROHIBITED;          // default is YES.</span><br></pre></td></tr></table></figure>
+<p>官方文档说：当一个控制器只有一个 scrollView 或 scrollView 的子类（tableView，collectionView等），并且把这个属性设置为 YES，点击状态栏才能回到顶部；当有2个或以上的scrollView，系统不知道你需要操作的是那个scrollView，因此需要将其他的scrollView的这个属性设置为 NO。</p>
+<h3 id="导航栏和状态栏隐藏"><a href="#导航栏和状态栏隐藏" class="headerlink" title="导航栏和状态栏隐藏"></a>导航栏和状态栏隐藏</h3>
       
     </div>
     
@@ -491,9 +378,7 @@ ___
       
         <div class="post-tags">
           
-            <a href="/tags/MarkDown/" rel="tag">#MarkDown</a>
-          
-            <a href="/tags/MacDown/" rel="tag">#MacDown</a>
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
         </div>
       
@@ -502,12 +387,16 @@ ___
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/05/06/apple 内购流程梳理/" rel="next" title="apple 内购流程梳理">
+                <i class="fa fa-chevron-left"></i> apple 内购流程梳理
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/25/Welcome To Hexo/" rel="prev" title="Welcome To Hexo">
-                Welcome To Hexo <i class="fa fa-chevron-right"></i>
+              <a href="/2016/05/18/iOS时间格式转换总结/" rel="prev" title="iOS时间格式转换总结">
+                iOS时间格式转换总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -534,8 +423,8 @@ ___
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/08/MacDown 使用说明/"
-           data-title="MacDown中MarkDown的使用规范总结" data-url="http://yoursite.com/2016/04/08/MacDown 使用说明/">
+      <div class="ds-thread" data-thread-key="2016/05/13/iOS 开发中一些实用小代码/"
+           data-title="iOS 开发中一些实用小代码" data-url="http://yoursite.com/2016/05/13/iOS 开发中一些实用小代码/">
       </div>
     
   </div>
@@ -664,7 +553,7 @@ ___
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#标题"><span class="nav-number">1.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">2.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接、超链接、图片和代码"><span class="nav-number">3.</span> <span class="nav-text">链接、超链接、图片和代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格"><span class="nav-number">4.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">5.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码段"><span class="nav-number">1.</span> <span class="nav-text">代码段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加-pch-文件"><span class="nav-number">1.1.</span> <span class="nav-text">添加 pch 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">1.2.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#点击状态栏不返回顶部问题"><span class="nav-number">1.3.</span> <span class="nav-text">点击状态栏不返回顶部问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导航栏和状态栏隐藏"><span class="nav-number">1.4.</span> <span class="nav-text">导航栏和状态栏隐藏</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
