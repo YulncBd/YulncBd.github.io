@@ -1,0 +1,773 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="调试是程序开发的重要的功能组成部分，可以用来发现程序出存在的问题，快速定位及解决，调试也可以辅助更好的理解程序。事实上，调试最初就是为了解决问题而产生的，调试的英文为debug， 而bug就是程序中存在的问题，debug就是解决掉这些问题。
+
+1.调试的功能：
+在调试中，程序的每一步的执行均是可控的，可以通过单步执行，设置断点等，控制程序的运行节奏，并在每次暂停时，都可以查看当前有效变量的具体值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Try、Try Again！The worst result is failure!">
+<meta property="og:url" content="http://yoursite.com/2016/06/15/NSLog使用 与 LLDB命令/index.html">
+<meta property="og:site_name" content="Try、Try Again！The worst result is failure!">
+<meta property="og:description" content="调试是程序开发的重要的功能组成部分，可以用来发现程序出存在的问题，快速定位及解决，调试也可以辅助更好的理解程序。事实上，调试最初就是为了解决问题而产生的，调试的英文为debug， 而bug就是程序中存在的问题，debug就是解决掉这些问题。
+
+1.调试的功能：
+在调试中，程序的每一步的执行均是可控的，可以通过单步执行，设置断点等，控制程序的运行节奏，并在每次暂停时，都可以查看当前有效变量的具体值。">
+<meta property="og:image" content="http://img1.ph.126.net/jQSUUWx67soejYnPYeTipg==/4855443348360538462.jpg">
+<meta property="og:image" content="http://img2.ph.126.net/vIalJWfbjDn_u8-cDQ0fAQ==/6631707681466260683.jpg">
+<meta property="og:updated_time" content="2016-06-20T07:43:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Try、Try Again！The worst result is failure!">
+<meta name="twitter:description" content="调试是程序开发的重要的功能组成部分，可以用来发现程序出存在的问题，快速定位及解决，调试也可以辅助更好的理解程序。事实上，调试最初就是为了解决问题而产生的，调试的英文为debug， 而bug就是程序中存在的问题，debug就是解决掉这些问题。
+
+1.调试的功能：
+在调试中，程序的每一步的执行均是可控的，可以通过单步执行，设置断点等，控制程序的运行节奏，并在每次暂停时，都可以查看当前有效变量的具体值。">
+<meta name="twitter:image" content="http://img1.ph.126.net/jQSUUWx67soejYnPYeTipg==/4855443348360538462.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title>  | Try、Try Again！The worst result is failure! </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Try、Try Again！The worst result is failure!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-15T11:17:37+08:00" content="2016-06-15">
+              2016-06-15
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/15/NSLog使用 与 LLDB命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/15/NSLog使用 与 LLDB命令/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>调试是程序开发的重要的功能组成部分，可以用来发现程序出存在的问题，快速定位及解决，调试也可以辅助更好的理解程序。事实上，调试最初就是为了解决问题而产生的，调试的英文为debug， 而bug就是程序中存在的问题，debug就是解决掉这些问题。</p>
+<blockquote>
+<p>1.调试的功能：</p>
+<p>在调试中，程序的每一步的执行均是可控的，可以通过单步执行，设置断点等，控制程序的运行节奏，并在每次暂停时，都可以查看当前有效变量的具体值。</p>
+<p>2.对初学者的意义：</p>
+<p>调试中可以很明确的看到程序的执行过程，以及每一步产生的变化，对于初学者，这样直观的体验自然要比读代码更容易理解，而看到现象之后，再回想理论也更容易。</p>
+<p>3.对编程者的意义：</p>
+<p>当程序的运行结果与期望不符时，可以通过调试，查看每步的具体执行及结果，因此可以定位出到底是哪个操作或语句与预期的不同，从而快速定位，再针对性分析代码，实现快速解决问题的目的。</p>
+</blockquote>
+<h2 id="NSLog-使用"><a href="#NSLog-使用" class="headerlink" title="NSLog 使用"></a>NSLog 使用</h2><p>在XCode做开发调试时往往需要打印一些调试信息做debug用</p>
+<h3 id="NSLog-性能问题"><a href="#NSLog-性能问题" class="headerlink" title="NSLog 性能问题"></a>NSLog 性能问题</h3><p>它的运行会占用时间和设备资源。当打印信息的地方多了之后在模拟器上跑可能不会有什么问题，因为模拟器用的是电脑的硬件，但是当应用跑在设备上时这些输出语句会在很大程度上影响应用的性能，而且输出的数据也可能会暴露出App里的保密数据，所以发布正式版时需要把这些输出全部屏蔽掉，针对这种问题可以写一些宏来控制这些调试信息的输出。</p>
+<p>解决方案：</p>
+<blockquote>
+<p>简单粗暴的解决方案：在APP release前，将所有的NSLog注释掉，简单有效，但副作用是：下次你要调试时，又得将NSLog一个个取消注释。</p>
+<p>正确的解决方案：你以release模式编译的程序不会用NSLog输出，而你以debug模式编译的程序将执行NSLog的全部功能。 在release版本禁止输出NSLog内容。</p>
+</blockquote>
+<p>如何实现？</p>
+<ol>
+<li>在 xxx.pch (预编译文件) 中添加以下代码：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//用宏指令做一个判断，如果DEBUG为真，则编译<span class="comment">#ifdef到#endif宏定义，否则编译器就不编译；</span></span><br><span class="line"><span class="comment">#ifdef DEBUG  </span></span><br><span class="line"><span class="comment">#define NSLog(...) NSLog(__VA_ARGS__)  </span></span><br><span class="line"><span class="comment">#define debugMethod() NSLog(@"%s", __func__)  </span></span><br><span class="line"><span class="comment">#else  </span></span><br><span class="line"><span class="comment">#define NSLog(...)  </span></span><br><span class="line"><span class="comment">#define debugMethod()  </span></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>设置DEBUG</li>
+</ol>
+<p>在 “Target &gt; Build Settings &gt; Preprocessor Macros &gt; Debug” 里有一个”DEBUG=1”。</p>
+<p>设置为Debug模式下，点击Product –&gt; Scheme –&gt; Edit Scheme</p>
+<p>设置run –&gt; info –&gt; Build Configuration成Debug时，就可以打印nslog了。</p>
+<p>设置Release，发布app版本的时候就不会打印了，提高了性能。</p>
+<h3 id="如何自定义输入"><a href="#如何自定义输入" class="headerlink" title="如何自定义输入"></a>如何自定义输入</h3><p>在 xxx.pch 中添加以下代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ifdef DEBUG</span></span><br><span class="line"><span class="comment">#define NSLog(format, ...) fprintf(stderr, "class：%s \nline： %d \nmethod：%s \nmessage：%s \n%s \n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__LINE__, __func__,[[NSString stringWithFormat:format, ##__VA_ARGS__] UTF8String], [@"----------------------------------------------" UTF8String]);</span></span><br><span class="line"><span class="comment">#else</span></span><br><span class="line"><span class="comment">#define NSLog(format, ...)</span></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure>
+<p>可以根据个人需要调整上面代码，主要就是这几个宏 ##__VA_ARGS<strong> , \</strong>FILE<strong> , \</strong>LINE<strong> 和\</strong>FUNCTION__。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1) __VA_ARGS__ 是一个可变参数的宏，很少人知道这个宏，这个可变参数的宏是新的C99规范中新增的，目前似乎只有gcc支持（VC6.0的编译器不支持）。宏前面加上<span class="comment">##的作用在于，当可变参数的个数为0时，这里的##起到把前面多余的","去掉的作用,否则会编译出错, 你可以试试。</span></span><br><span class="line">2) __FILE__ 宏在预编译时会替换成当前的源文件名</span><br><span class="line">3) __LINE__宏在预编译时会替换成当前的行号</span><br><span class="line">4) __FUNCTION__宏在预编译时会替换成当前的函数名称</span><br><span class="line">5) __func__ 打印当前函数或方法，c字符串</span><br></pre></td></tr></table></figure>
+<h3 id="将Log日志重定向输出到文件"><a href="#将Log日志重定向输出到文件" class="headerlink" title="将Log日志重定向输出到文件"></a>将Log日志重定向输出到文件</h3><p>对于真机，日志没法保存，不好分析问题。所以有必要将日志保存到应用的Docunment目录下，并设置成共享文件，这样才能取出分析。</p>
+<p>首先是日志输出，分为c的printf和标准的NSLog输出，printf会向标准输出(sedout)打印，而NSLog则是向标准出错(stderr)，我们需要同时让他们都将日志打印到一个文件中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//例子：</span><br><span class="line">freopen(<span class="string">"xx.log"</span>,<span class="string">"a+"</span>,stdout);</span><br><span class="line">freopen(<span class="string">"xx.log"</span>,<span class="string">"a+"</span>,stderr);</span><br></pre></td></tr></table></figure>
+<p>具体做法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 将NS<span class="built_in">log</span>打印信息保存到Document目录下的文件中</span><br><span class="line">- (void)redirectNS<span class="built_in">log</span>ToDocumentFolder</span><br><span class="line">&#123;</span><br><span class="line">    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);</span><br><span class="line">    NSString *documentDirectory = [paths objectAtIndex:0];</span><br><span class="line">    NSString *<span class="built_in">log</span>FilePath = [documentDirectory stringByAppendingPathComponent:@<span class="string">"log.txt"</span>];</span><br><span class="line">    </span><br><span class="line">    // 先删除已经存在的文件</span><br><span class="line">    NSFileManager *defaultManager = [NSFileManager defaultManager];</span><br><span class="line">    [defaultManager removeItemAtPath:<span class="built_in">log</span>FilePath error:nil];</span><br><span class="line">    </span><br><span class="line">    // 将<span class="built_in">log</span>输入到文件</span><br><span class="line">    freopen([<span class="built_in">log</span>FilePath cStringUsingEncoding:NSASCIIStringEncoding], <span class="string">"a+"</span>, stdout);</span><br><span class="line">    freopen([<span class="built_in">log</span>FilePath cStringUsingEncoding:NSASCIIStringEncoding], <span class="string">"a+"</span>, stderr);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">此函数要在- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions中调用。</span><br></pre></td></tr></table></figure>
+<p>当连接Mac调试的时候把这些注释掉，否则log只会输入到文件中，而不能从xcode的监视器中看到。</p>
+<p> 最后配置共享文件夹：</p>
+<p>在应用程序的Info.plist文件中添加UIFileSharingEnabled键（Application supports iTunes file sharing 键），并将键值设置为YES。将您希望共享的文件放在应用程序的 Documents目录。一旦设备插入到用户计算机，iTunes 9.1就会在选中设备的Apps标签中找到自己的应用，查看共享内容，找到 log.txt 文件。</p>
+<h2 id="断言NSAssert-的使用"><a href="#断言NSAssert-的使用" class="headerlink" title="断言NSAssert()的使用"></a>断言NSAssert()的使用</h2><p>NSAssert()只是一个宏，用于开发阶段调试程序中的Bug，通过为NSAssert()传递条件表达式来断定是否属于Bug，满足条件返回真值，程序继续运行，如果返回假值，则抛出异常，并切可以自定义异常描述。NSAssert()是这样定义的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define NSAssert(condition, desc)</span></span><br></pre></td></tr></table></figure>
+<p>condition是条件表达式，值为YES或NO；desc为异常描述，通常为NSString。当conditon为YES时程序继续运行，为NO时，则抛出带有desc描述的异常信息。NSAssert()可以出现在程序的任何一个位置。具体事例如下：</p>
+<p>生成一个LotteryEntry对象时，传入的NSDate不能为nil，加入NSAssert()判断。对象初始化源码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (id)initWithEntryDate:(NSDate *)theDate &#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    <span class="keyword">if</span> (self) &#123;</span><br><span class="line">        NSAssert(theDate != nil, @<span class="string">"Argument must be non-nil"</span>);</span><br><span class="line">        entryDate = theDate;</span><br><span class="line">        firstNumber = (int)random() % 100 + 1;</span><br><span class="line">        secondNumber = (int)random() % 100 + 1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span>  self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来则是生成对象时传入一个值为nil的NSDate，看断言是否运行。</p>
+<p>LotteryEntry *nilEntry = [[LotteryEntry alloc] initWithEntryDate:nil];</p>
+<p><strong>断言效果如下：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">2013-01-17 20:49:12.486 lottery[3951:303] *** Terminating app due to uncaught exception <span class="string">'NSInternalInconsistencyException'</span>, reason: <span class="string">'Argument must be non-nil'</span></span><br><span class="line"></span><br><span class="line">*** First throw call stack:</span><br><span class="line">(</span><br><span class="line">0   CoreFoundation                      0x00007fff90c590a6 __exceptionPreprocess + 198</span><br><span class="line">1   libobjc.A.dylib                     0x00007fff8fd2a3f0 objc_exception_throw + 43</span><br><span class="line">2   CoreFoundation                      0x00007fff90c58ee8 +[NSException raise:format:arguments:] + 104</span><br><span class="line">3   Foundation                          0x00007fff88dae6a2 -[NSAssertionHandler handleFailureInMethod:object:file:lineNumber:description:] + 189</span><br><span class="line">4   lottery                             0x0000000100001929 -[LotteryEntry initWithEntryDate:] + 249</span><br><span class="line">5   lottery                             0x0000000100001794 main + 932</span><br><span class="line">6   libdyld.dylib                       0x00007fff8d83f7e1 start + 0</span><br><span class="line">)</span><br><span class="line">libc++abi.dylib: terminate called throwing an exception</span><br></pre></td></tr></table></figure>
+<p>移除NSAssert比较简单，我们需要在target中选择build settings, 找到 preprocessor macros(预处理宏）项目，配置它的release为 NS_BLOCK_ASSERTIONS。</p>
+<p>具体操作步骤为： 双击release的空白处，此时会弹出对话框，点击对话框中的＋添加NS_BLOCK_ASSERTIONS。</p>
+<h2 id="Xcode-的LLDB-调试"><a href="#Xcode-的LLDB-调试" class="headerlink" title="Xcode 的LLDB 调试"></a>Xcode 的LLDB 调试</h2><p>先说一下Xcode怎样添加断点，以及调试区域在哪里，话不多说，请看图：</p>
+<p><img src="http://img1.ph.126.net/jQSUUWx67soejYnPYeTipg==/4855443348360538462.jpg" alt=""></p>
+<p>当代码走到断点处，会进入调试模式，在Xcode右下方的调试区域，有 (lldb) 显示。</p>
+<h3 id="常用-lldb-命令"><a href="#常用-lldb-命令" class="headerlink" title="常用 lldb 命令"></a>常用 lldb 命令</h3><ul>
+<li>po 或 p 命令</li>
+</ul>
+<p>调试器中最常用到的命令是 p （用于输出基本类型）或者 po （用于输出 Objective-C 对象），示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 调试命令</span><br><span class="line">po username</span><br><span class="line"></span><br><span class="line">// 运行结果</span><br><span class="line">admin</span><br><span class="line"></span><br><span class="line">// 调试命令</span><br><span class="line">p username</span><br><span class="line"></span><br><span class="line">// 运行结果</span><br><span class="line">(__NSCFConstantString *) <span class="variable">$1</span> = 0x000000010c0f32a0 @<span class="string">"admin"</span></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">1. 每次查询的结果会保存在一些持续变量中($[0-9]+)，这样你可以在后面的查询中直接使用这些值。比如现在我接下来要重新取回 <span class="variable">$1</span> 的值：p <span class="variable">$1</span> </span><br><span class="line">运行结果：(__NSCFConstantString *) <span class="variable">$1</span> = 0x000000010c0f32a0 @<span class="string">"admin"</span></span><br><span class="line"></span><br><span class="line">2. 0x000000010c0f32a0 是username 的地址</span><br><span class="line">**/</span><br></pre></td></tr></table></figure>
+<p>po 或 p 命令远没你想的那么简单，他还有执行代码的功能，比如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 执行命令</span><br><span class="line"> po [self.view <span class="built_in">set</span>BackgroundColor:[UIColor redColor]]</span><br><span class="line"></span><br><span class="line">然后你就发现当前视图的背景变成红色了。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>expression 或 expr 命令</li>
+</ul>
+<p>常用于在调试过程中修改变量的值，而不用重新启动程序。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 执行命令</span><br><span class="line">expression username = @<span class="string">"hello"</span></span><br><span class="line"></span><br><span class="line">// 执行结果</span><br><span class="line">(NSTaggedPointerString *) <span class="variable">$0</span> = 0xa00006f6c6c65685 @<span class="string">"hello"</span></span><br><span class="line"></span><br><span class="line">// 执行命令</span><br><span class="line">po username</span><br><span class="line"></span><br><span class="line">// 执行结果</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+<p>除了上面的用途，还可以新声明一个变量，比如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 执行命令</span><br><span class="line">expression NSString * <span class="variable">$a</span> = @<span class="string">"xxxx"</span>   // $符号不要丢了</span><br><span class="line"></span><br><span class="line">// 执行命令</span><br><span class="line">po <span class="variable">$a</span></span><br><span class="line"></span><br><span class="line">// 执行结果</span><br><span class="line">xxxx</span><br></pre></td></tr></table></figure>
+<ul>
+<li>call 命令</li>
+</ul>
+<p>call 命令和 po 命令的功能相似，有的地方说“在不需要显示输出，或是方法无返回值时使用call”，但是使用 po 命令系统会向编代码一样提示你方法名或变量名，但是 call 命令不会啊，没想出有什么理由放弃 po 而使用 call 。</p>
+<ul>
+<li>bt 命令</li>
+</ul>
+<p>bt 命令用来打印主线程的堆栈信息，bt all 可以打印所有线程的堆栈信息。</p>
+<ul>
+<li>image 命令</li>
+</ul>
+<p>image 命令可用于寻址，有多个组合命令。比较实用的用法是用于寻找栈地址对应的代码位置。</p>
+<p>比如以下代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@<span class="string">"1"</span>,@<span class="string">"2"</span>];</span><br><span class="line">NSLog(@<span class="string">"%@"</span>,array[3]);</span><br></pre></td></tr></table></figure>
+<p>这段代码会报数组越界的错误，错误信息如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">*** Terminating app due to uncaught exception <span class="string">'NSRangeException'</span>, reason: <span class="string">'*** -[__NSArrayI objectAtIndex:]: index 3 beyond bounds [0 .. 1]'</span></span><br><span class="line">*** First throw call stack:</span><br><span class="line">(</span><br><span class="line">	0   CoreFoundation                      0x0000000107d49d85 __exceptionPreprocess + 165</span><br><span class="line">	1   libobjc.A.dylib                     0x00000001077bddeb objc_exception_throw + 48</span><br><span class="line">	2   CoreFoundation                      0x0000000107c32934 -[__NSArrayI objectAtIndex:] + 164</span><br><span class="line">	3   demo                                0x00000001072b51f6 -[ViewController viewDidLoad] + 390</span><br><span class="line">	4   UIKit                               0x000000010829a984 -[UIViewController loadViewIfRequired] + 1198</span><br><span class="line">	5   UIKit                               0x000000010829acd3 -[UIViewController view] + 27</span><br><span class="line">	6   UIKit                               0x0000000108170fb4 -[UIWindow addRootViewControllerViewIfPossible] + 61</span><br><span class="line">	7   UIKit                               0x000000010817169d -[UIWindow _<span class="built_in">set</span>Hidden:forced:] + 282</span><br><span class="line">	8   UIKit                               0x0000000108183180 -[UIWindow makeKeyAndVisible] + 42</span><br><span class="line">	9   UIKit                               0x00000001080f7ed9 -[UIApplication _callInitializationDelegatesForMainScene:transitionContext:] + 4131</span><br><span class="line">	10  UIKit                               0x00000001080fe568 -[UIApplication _runWithMainScene:transitionContext:completion:] + 1769</span><br><span class="line">	11  UIKit                               0x00000001080fb714 -[UIApplication workspaceDidEndTransaction:] + 188</span><br><span class="line">	12  FrontBoardServices                  0x000000010ab688c8 __FBSSERIALQUEUE_IS_CALLING_OUT_TO_A_BLOCK__ + 24</span><br><span class="line">	13  FrontBoardServices                  0x000000010ab68741 -[FBSSerialQueue _performNext] + 178</span><br><span class="line">	14  FrontBoardServices                  0x000000010ab68aca -[FBSSerialQueue _performNextFromRunLoopSource] + 45</span><br><span class="line">	15  CoreFoundation                      0x0000000107c6f301 __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 17</span><br><span class="line">	16  CoreFoundation                      0x0000000107c6522c __CFRunLoopDoSources0 + 556</span><br><span class="line">	17  CoreFoundation                      0x0000000107c646e3 __CFRunLoopRun + 867</span><br><span class="line">	18  CoreFoundation                      0x0000000107c640f8 CFRunLoopRunSpecific + 488</span><br><span class="line">	19  UIKit                               0x00000001080faf21 -[UIApplication _run] + 402</span><br><span class="line">	20  UIKit                               0x00000001080fff09 UIApplicationMain + 171</span><br><span class="line">	21  demo                                0x00000001072b5bdf main + 111</span><br><span class="line">	22  libdyld.dylib                       0x000000010a52392d start + 1</span><br><span class="line">)</span><br><span class="line">libc++abi.dylib: terminating with uncaught exception of <span class="built_in">type</span> NSException</span><br><span class="line">(lldb)</span><br></pre></td></tr></table></figure>
+<p>可能出错的地址是0x00000001072b51f6（可以根据执行文件名判断，或者最小的栈地址）。为了进一步精确定位，我们可以输入以下的命令： </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 执行命令</span><br><span class="line">image lookup --address 0x00000001072b51f6</span><br><span class="line"></span><br><span class="line">// 运行结果</span><br><span class="line">Address: demo[0x00000001000011f6] (demo.__TEXT.__text + 390)</span><br><span class="line">Summary: demo`-[ViewController viewDidLoad] + 390 at ViewController.m:31</span><br><span class="line">  </span><br><span class="line">告诉我们出错位置是 ViewController.m 类的 31 行。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>简称和别名</li>
+</ul>
+<p>有些调试命令比较长，使用起来比较麻烦，我们可以自定义别名。比如给image lookup –address 添加了一个 ila 的别名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 执行命令</span><br><span class="line"><span class="built_in">command</span> <span class="built_in">alias</span> ila image lookup --address %1</span><br><span class="line"></span><br><span class="line">// 执行命令</span><br><span class="line">ila 0x00000001072b51f6</span><br><span class="line"></span><br><span class="line">// 运行结果</span><br><span class="line">Address: demo[0x00000001000011f6] (demo.__TEXT.__text + 390)</span><br><span class="line">Summary: demo`-[ViewController viewDidLoad] + 390 at ViewController.m:31</span><br></pre></td></tr></table></figure>
+<p>等等，还没有结束，还有一个非常重要的命令 help，如果你对expr 命令不了解，可以使用help expr 来查看更多关于expr 命令的信息。</p>
+<h3 id="调试技巧"><a href="#调试技巧" class="headerlink" title="调试技巧"></a>调试技巧</h3><p>请看图：</p>
+<p><img src="http://img2.ph.126.net/vIalJWfbjDn_u8-cDQ0fAQ==/6631707681466260683.jpg" alt=""></p>
+<p>双击断点，选择编辑选项，开始编辑断点。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Condition：此处是判断断点的执行条件，当(BOOL)[username isEqualToString:@<span class="string">"admin"</span>]为 YES 时，执行断点。</span><br><span class="line"></span><br><span class="line">Action：此处是执行的调试命令，比如 expr username = @<span class="string">"hello"</span> 等改变变量值的命令，或者格式化输出 po [NSString stringWithFormat:@<span class="string">"username:%@ \npassword:%@"</span>,username,password]，当然还可以执行其他命令。</span><br><span class="line"></span><br><span class="line">Options：此处勾选，断点处不会进入调试模式。</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>调试方法的灵活使用，可以减轻开发负担，同时也能更加准确的找到问题所在。这里只是平时常用的几个命令，想要更多的命令，还需要自己取学习。</p>
+<p>参考网站  <a href="http://lldb.llvm.org/" target="_blank" rel="external">The LLDB Debugger</a></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>如果觉得写的不错，那就打赏一下吧！</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/weixin.png" alt="东折 WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+  </div>
+</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/18/iOS Bug 汇总/" rel="next" title="iOS Bug 汇总">
+                <i class="fa fa-chevron-left"></i> iOS Bug 汇总
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/15/NSLog使用 与 LLDB命令/"
+           data-title="" data-url="http://yoursite.com/2016/06/15/NSLog使用 与 LLDB命令/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="东折" />
+          <p class="site-author-name" itemprop="name">东折</p>
+          <p class="site-description motion-element" itemprop="description">以出以入，以就鲜絜，似善化。其万折也必东，似志。是故君子见大水必观焉。 --  荀子·宥坐</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="简书">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NSLog-使用"><span class="nav-number">1.</span> <span class="nav-text">NSLog 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSLog-性能问题"><span class="nav-number">1.1.</span> <span class="nav-text">NSLog 性能问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何自定义输入"><span class="nav-number">1.2.</span> <span class="nav-text">如何自定义输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将Log日志重定向输出到文件"><span class="nav-number">1.3.</span> <span class="nav-text">将Log日志重定向输出到文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#断言NSAssert-的使用"><span class="nav-number">2.</span> <span class="nav-text">断言NSAssert()的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode-的LLDB-调试"><span class="nav-number">3.</span> <span class="nav-text">Xcode 的LLDB 调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用-lldb-命令"><span class="nav-number">3.1.</span> <span class="nav-text">常用 lldb 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试技巧"><span class="nav-number">3.2.</span> <span class="nav-text">调试技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">东折</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yulncbd"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
