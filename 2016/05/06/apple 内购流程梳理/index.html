@@ -1,0 +1,1114 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,内购," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="第一次接触内购，网上搜了很多资料，大多数都是讲的基本的用法，不能用来处理一些特殊情况，但是我们需要解决的往往都是一些特殊情况。经过一段时间的努力和时间，终于大体了解了内购的基本流程，这里整理一下内购的代码，以便以后使用或他人借鉴。
+准备部分没有开发者帐号以及证书没有配置好的请自行百度配置。
+创建一个 AppID 和 BoundleID进入苹果的Apple Developer 创建一个 AppID">
+<meta property="og:type" content="article">
+<meta property="og:title" content="apple 内购流程梳理">
+<meta property="og:url" content="http://yoursite.com/2016/05/06/apple 内购流程梳理/index.html">
+<meta property="og:site_name" content="Try and try again！The worst result is failure!">
+<meta property="og:description" content="第一次接触内购，网上搜了很多资料，大多数都是讲的基本的用法，不能用来处理一些特殊情况，但是我们需要解决的往往都是一些特殊情况。经过一段时间的努力和时间，终于大体了解了内购的基本流程，这里整理一下内购的代码，以便以后使用或他人借鉴。
+准备部分没有开发者帐号以及证书没有配置好的请自行百度配置。
+创建一个 AppID 和 BoundleID进入苹果的Apple Developer 创建一个 AppID">
+<meta property="og:image" content="http://img2.ph.126.net/PHbMEsByXbQlbE0Mhl8c4w==/1998472334747494370.png">
+<meta property="og:image" content="http://img0.ph.126.net/m9OGzhRpudMDV93Xt3j0dA==/6598061526206718111.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/cut-LzCmQQFq0EEXEvJcTA==/6598175875415825922.jpg">
+<meta property="og:image" content="http://img1.ph.126.net/hqxC0_wml4cGOGcUw6RZsQ==/6598202263694892499.jpg">
+<meta property="og:image" content="http://img1.ph.126.net/fysaS4F0T-wJmb2BVVmpkA==/3756002089328009485.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/Rjxx7L3gWuFtXk3ItI_Nlw==/4860509897940868893.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/NCl3SRrwWzgF3rzCb-WUZQ==/6598193467601866965.jpg">
+<meta property="og:image" content="http://img1.ph.126.net/ldHXIWZdgXmOk9iFK1Vfvg==/6598149487136756941.jpg">
+<meta property="og:updated_time" content="2016-05-12T03:18:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="apple 内购流程梳理">
+<meta name="twitter:description" content="第一次接触内购，网上搜了很多资料，大多数都是讲的基本的用法，不能用来处理一些特殊情况，但是我们需要解决的往往都是一些特殊情况。经过一段时间的努力和时间，终于大体了解了内购的基本流程，这里整理一下内购的代码，以便以后使用或他人借鉴。
+准备部分没有开发者帐号以及证书没有配置好的请自行百度配置。
+创建一个 AppID 和 BoundleID进入苹果的Apple Developer 创建一个 AppID">
+<meta name="twitter:image" content="http://img2.ph.126.net/PHbMEsByXbQlbE0Mhl8c4w==/1998472334747494370.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/05/06/apple 内购流程梳理/"/>
+
+
+
+
+
+  <title>apple 内购流程梳理 | Try and try again！The worst result is failure!</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Try and try again！The worst result is failure!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/06/apple 内购流程梳理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="东折">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try and try again！The worst result is failure!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">apple 内购流程梳理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-06T00:00:00+08:00">
+                2016-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/05/06/apple 内购流程梳理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/06/apple 内购流程梳理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>第一次接触内购，网上搜了很多资料，大多数都是讲的基本的用法，不能用来处理一些特殊情况，但是我们需要解决的往往都是一些特殊情况。经过一段时间的努力和时间，终于大体了解了内购的基本流程，这里整理一下内购的代码，以便以后使用或他人借鉴。</p>
+<h2 id="准备部分"><a href="#准备部分" class="headerlink" title="准备部分"></a>准备部分</h2><p>没有开发者帐号以及证书没有配置好的请自行百度配置。</p>
+<h3 id="创建一个-AppID-和-BoundleID"><a href="#创建一个-AppID-和-BoundleID" class="headerlink" title="创建一个 AppID 和 BoundleID"></a>创建一个 AppID 和 BoundleID</h3><p>进入苹果的<a href="https://developer.apple.com" target="_blank" rel="external">Apple Developer</a> 创建一个 AppID 和 BoundleID， 进入开发者中心后，点击 <code>Account</code> 选项 ，在点击 <code>Certificates, IDs &amp; Profiles</code> ，在点击 <code>App IDs</code>  如图</p>
+<p><img src="http://img2.ph.126.net/PHbMEsByXbQlbE0Mhl8c4w==/1998472334747494370.png" alt=""></p>
+<p> 最后点击页面上的加号创建AppID（AppID 和 BoundleID 的命名按照苹果的要求来就好了，最后选择需要的服务，要勾选上内购）。</p>
+<p><img src="http://img0.ph.126.net/m9OGzhRpudMDV93Xt3j0dA==/6598061526206718111.jpg" alt=""></p>
+<h3 id="新建一个-App-应用"><a href="#新建一个-App-应用" class="headerlink" title="新建一个 App 应用"></a>新建一个 App 应用</h3><p>进入苹果的<a href="https://itunesconnect.apple.com" target="_blank" rel="external">itunes Connect</a>，登录后点击 <code>我的 App</code> 然后创建一个新的应用，如图</p>
+<p><img src="http://img0.ph.126.net/cut-LzCmQQFq0EEXEvJcTA==/6598175875415825922.jpg" alt=""></p>
+<p>按照要求填写上面申请好的AppID 和 BoundleID，填写好以后，点击 <code>创建</code> 就有一个新应用了。</p>
+<h3 id="添加付费项目"><a href="#添加付费项目" class="headerlink" title="添加付费项目"></a>添加付费项目</h3><p>点击添加的应用，进入下一个页面后点击 <code>功能</code>，然后添加 App 内购项目如图</p>
+<p><img src="http://img1.ph.126.net/hqxC0_wml4cGOGcUw6RZsQ==/6598202263694892499.jpg" alt=""></p>
+<p>一般都是消耗型项目吧，这里我选择的是消耗型项目。</p>
+<p>然后是填写具体的内购信息，不知道该填什么的可以随便填一些信息，看看效果，如图</p>
+<p><img src="http://img1.ph.126.net/fysaS4F0T-wJmb2BVVmpkA==/3756002089328009485.jpg" alt=""></p>
+<p><img src="http://img0.ph.126.net/Rjxx7L3gWuFtXk3ItI_Nlw==/4860509897940868893.jpg" alt=""></p>
+<p>测试的时候照片可以不上串，产品Id 是唯一的（比较重要）。</p>
+<h3 id="添加测试账户"><a href="#添加测试账户" class="headerlink" title="添加测试账户"></a>添加测试账户</h3><p>总不能用正式帐号去测试吧，那样要花好多钱的，这里我们用测试帐号去测试内购流程。</p>
+<p>进入苹果的<a href="https://itunesconnect.apple.com" target="_blank" rel="external">itunes Connect</a>，登录后点击 <code>用户和职能</code> 然后在点击 <code>沙箱技术测试员</code>，最后添加测试帐号，如图</p>
+<p><img src="http://img0.ph.126.net/NCl3SRrwWzgF3rzCb-WUZQ==/6598193467601866965.jpg" alt=""></p>
+<p>这里的邮箱可以随便填写，不用去验证，填完后准备工作就完成了。</p>
+<p>最后，注意一下测试内购时，把 App Store 里的正式帐号注销掉，并且不要用测试帐号去登录 App Store。</p>
+<h2 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h2><p>在正式编码前，我们先来了解一下内购的大体流程，请看图</p>
+<p><img src="http://img1.ph.126.net/ldHXIWZdgXmOk9iFK1Vfvg==/6598149487136756941.jpg" alt=""></p>
+<p>这是从网上找的一张图，很清楚的描述了内购的流程，下面的代码我会按照这张图的流程来进行。</p>
+<h3 id="在工程里导入storekit-framework，在内购类导入-import"><a href="#在工程里导入storekit-framework，在内购类导入-import" class="headerlink" title="在工程里导入storekit.framework，在内购类导入#import \"></a>在工程里导入storekit.framework，在内购类导入#import \<storekit storekit.h\=""></storekit></h3><h3 id="客户端代码"><a href="#客户端代码" class="headerlink" title="客户端代码"></a>客户端代码</h3><p><strong>.h文件</strong></p>
+<pre><code>//
+//  StoreAPI.h
+//
+
+//内购支付类
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;StoreKit/StoreKit.h&gt;
+
+// 加入 SKPaymentTransactionObserver 和 SKProductsRequestDelegate 监听机制
+@interface StoreAPI : NSObject&lt;SKPaymentTransactionObserver,SKProductsRequestDelegate&gt;
+
++ (instancetype)shareInstance;
+
+/*
+ 请求商品，购买页面点击购买时调用的方法
+ @param:type  商品id
+ */
+- (void)requestProductData:(NSString *)type;
+
+//恢复购买
+- (void)restoreProduct;
+
+@end
+</code></pre><p><strong>.m文件</strong></p>
+<pre><code>//
+//  StoreAPI.m
+//
+
+#import &quot;StoreAPI.h&quot;
+
+//购买验证URL
+#define kAppStoreVerifyURL @&quot;https://buy.itunes.apple.com/verifyReceipt&quot; //实际购买验证URL
+#define kSandboxVerifyURL @&quot;https://sandbox.itunes.apple.com/verifyReceipt&quot; //开发阶段沙盒验证URL
+
+static StoreAPI *storeAPI = nil;
+@implementation StoreAPI
+{
+    NSString *productId;        
+}
+
+//单例
++ (instancetype)shareInstance
+{
+     static dispatch_once_t onceToken;
+     dispatch_once(&amp;onceToken, ^{
+
+          storeAPI = [[TDStoreAPI alloc]init];
+         // 添加观察者，观察内购的状态
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:storeAPI];
+    });
+        return storeAPI;  
+}
+
+// 请求商品
+// 这里的产品Id是服务端传过来的，也可以保存在手机上(不利于修改)
+- (void)requestProductData:(NSString *)type
+{
+    productId = type;
+
+    //判断设备是否与支持内购
+    if (![SKPaymentQueue canMakePayments]) {
+        NSLog(@&quot;不允许程序内付费&quot;);
+        return;
+    }
+
+    // 创建请求 
+    NSArray *product=[[NSArray alloc]initWithObjects:type, nil];
+    NSSet *nsset=[NSSet setWithArray:product];
+    SKProductsRequest *request=[[SKProductsRequest alloc]initWithProductIdentifiers:nsset];
+    request.delegate=self;
+    [request start];
+}
+
+#pragma mark - SKProductsRequestDelegate
+//收到产品返回的信息
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
+{
+    NSArray *product=response.products;
+    NSLog(@&quot;ProductID:%@&quot;,response.invalidProductIdentifiers);
+    NSLog(@&quot;产品付费数量：%lu&quot;,(unsigned long)[product count]);
+
+    if ([product count]==0) {
+        NSLog(@&quot;没有商品&quot;);
+        return;
+    }
+
+    SKProduct *p=nil;
+
+    for (SKProduct *pro in product) {
+
+        NSLog(@&quot;%@&quot;,[pro description]);
+        NSLog(@&quot;%@&quot;,[pro localizedTitle]);
+        NSLog(@&quot;%@&quot;,[pro localizedDescription]);
+        NSLog(@&quot;%@&quot;,[pro price]);
+        NSLog(@&quot;%@&quot;,[pro productIdentifier]);
+
+        if ([pro.productIdentifier isEqualToString:productId]) {
+
+            p=pro;
+        }
+    }
+
+    SKPayment *payment=[SKPayment paymentWithProduct:p];
+
+    // 将支付请求添加进支付队列
+    [[SKPaymentQueue defaultQueue]addPayment:payment];
+}
+
+//请求失败（代理方法）
+- (void)request:(SKRequest *)request didFailWithError:(NSError *)error
+{
+    // 在这里可以做一些购买失败的弹框之类的处理
+    NSLog(@&quot;--错误--：%@&quot;,error);
+}
+
+//请求结束
+- (void)requestDidFinish:(SKRequest *)request
+{
+    NSLog(@&quot;反馈信息结束&quot;);
+}
+
+#pragma mark SKPaymentTransactionObserver
+
+//监听购买结果（嗯，这个方法很重要！！！）
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+{
+    //记录了所有的购买记录
+    for (SKPaymentTransaction *tran in transactions) {
+
+        switch (tran.transactionState) {
+            case SKPaymentTransactionStatePurchased:
+            {
+                NSLog(@&quot;交易完成&quot;);   
+                [self completeTransaction:tran];
+            }
+                break;
+
+            case SKPaymentTransactionStatePurchasing:
+            {
+                NSLog(@&quot;商品添加进列表&quot;);
+            }
+                break;
+
+            case SKPaymentTransactionStateRestored:
+            {
+                [self restoreTransaction:tran];
+                NSLog(@&quot;已经购买过商品&quot;);                    
+            }
+                break;
+            case SKPaymentTransactionStateFailed:
+            {
+                NSLog(@&quot;交易失败&quot;);
+                [self failedTransaction:tran];               
+            }
+                break;     
+            default:
+                break;
+        }   
+    }
+}
+
+//恢复购买（自定义方法）
+- (void)restoreProduct{
+   [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+//交易成功（自定义方法）
+- (void)completeTransaction:(SKPaymentTransaction *)transaction
+{
+    //从沙盒中获取交易凭证并且拼接成请求体数据
+    NSURL *receiptUrl=[[NSBundle mainBundle] appStoreReceiptURL];
+    NSData *receiptData;
+    // 获取凭证的方法在ios7.0以后和以前有点不一样
+    if (NSFoundationVersionNumber &gt;= NSFoundationVersionNumber_iOS_7_0)
+    {
+        receiptData = [NSData dataWithContentsOfURL:receiptUrl];
+    }else
+    {
+        receiptData = transaction.transactionReceipt;
+    }
+    //BASE64 编码
+    NSString *receiptString=[receiptData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+
+    // 保存交易记录
+    [self recordTransaction:transaction];
+    [self provideContent:transaction.payment.productIdentifier];
+
+    NSString * productIdentifier = transaction.payment.productIdentifier;
+
+    if ([productIdentifier length] &gt; 0) {
+        // 向自己的服务器验证购买凭证
+        [self verifyPurchaseWithPaymentTransaction:receiptString];
+    }
+
+    // Remove the transaction from the payment queue.
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+}
+
+//交易失败（自定义方法）
+- (void)failedTransaction:(SKPaymentTransaction *)transaction {
+    if(transaction.error.code != SKErrorPaymentCancelled) {
+        NSLog(@&quot;购买失败&quot;);
+      } else {
+        NSLog(@&quot;用户取消交易&quot;);
+    }
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+}
+
+//恢复交易
+- (void) restoreTransaction: (SKPaymentTransaction *)transaction
+{
+    NSLog(@&quot; 交易恢复处理&quot;);
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+
+}
+
+// 恢复购买完成
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+    NSLog(@&quot;恢复成功&quot;);
+//    if (queue.transactions.count == 0) {
+
+//    }else{
+
+//    }
+}
+
+//记录交易
+- (void)recordTransaction:(SKPaymentTransaction *)transaction {
+    // Optional: Record the transaction on the server side...
+    NSLog(@&quot;Hello World&quot;);
+}
+
+//下载
+- (void)provideContent:(NSString *)productIdentifier {
+    NSLog(@&quot;Hello World&quot;);
+}
+
+
+//验证购买凭证
+-(void)verifyPurchaseWithPaymentTransaction:(NSString *)receiptString{
+
+    // 这里的代码是客户端自己向苹果验证的步骤（服务端的和这里相似）
+    //发送网络POST请求，对购买凭据进行验证---测试阶段对沙盒进行验证
+    NSURL *url = [NSURL URLWithString:kSandboxVerifyURL];
+
+    //国内访问苹果服务器比较慢 timeoutInterval需要长一点
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
+  request.HTTPMethod = @&quot;POST&quot;;
+
+    if (receiptString.length &lt; 20) {
+        return;
+    }
+    NSString *bodyString = [NSString stringWithFormat:@&quot;{\&quot;receipt-data\&quot; : \&quot;%@\&quot;}&quot;, receiptString];//拼接请求数据
+   NSData *bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
+   request.HTTPBody = bodyData;
+   //提交验证请求，并获得官方的验证JSON结果
+    NSError *error;
+    NSData *result = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&amp;error];
+
+    if (error) {
+        NSLog(@&quot;验证失败&quot;);
+        return;
+    }
+   NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&amp;error];
+  //  如果status的值为0， 就说明该receipt为有效的。 否则就是无效的。
+   if ([dic[@&quot;status&quot;] intValue] == 0) {
+       NSLog(@&quot;验证成功&quot;);           
+    }else
+    {
+        NSLog(@&quot;验证失败&quot;);      
+   }
+}
+
+- (void)dealloc
+{
+    [[SKPaymentQueue defaultQueue]removeTransactionObserver:self];
+}
+
+@end
+</code></pre><h3 id="服务器端处理"><a href="#服务器端处理" class="headerlink" title="服务器端处理"></a>服务器端处理</h3><pre><code>接收ios端发过来的购买凭证。
+判断凭证是否已经存在或验证过，然后存储该凭证。
+将该凭证发送到苹果的服务器验证，并将验证结果返回给客户端。
+如果需要，修改用户相应的会员权限。
+考虑到网络异常情况，服务器的验证应该是一个可恢复的队列，如果网络失败了，应该进行重试。
+</code></pre><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>观察者应该在程序启动的时候就创建好，因为程序重新启动后，苹果会继续未完成的订单，这样就不会漏掉之前的交易信息。</p>
+</li>
+<li><p>苹果不会提供等待的提示弹框，这需要自己去实现。</p>
+</li>
+<li><p>由于攻击者可以伪造支付成功的凭证，所以需要增加服务器验证。客户端将支付凭证发给服务端，由服务端向苹果的服务器进行二次验证，确保凭证的有效性。</p>
+</li>
+<li><p>向苹果提交的是正式版的，但是苹果审核App时，会在sandbox 环境购买，所以产生的凭证需要连接苹果的测试服务器验证，但是提交的App连接的是线上的服务器，会造成验证失败的问题。解决方案是：如果返回的code 是 21007，那么再向苹果的测试服务器验证一次，如果code 是 0，表示验证成功。</p>
+</li>
+<li><p>考虑到断网的情况，客户端发送的购买凭证应该进行本地的持久化存储，如果程序退出，崩溃或断网，可以重新向服务器发送凭证，当服务器返回验证成功后可以删除相应的凭证。</p>
+</li>
+<li><p>由于苹果那边充值成功后，服务器还需要进行验证（连接的是国外的服务器，响应比较慢），所以充值的金额不能及时到帐，需要等几秒。（或许是我没有发现更好地解决方法）</p>
+</li>
+<li><p>如果向服务器发送购买凭证过程中断网或因其他原因失败，导致服务器没有收到购买凭证，或许需要监听网络状况，联网后再次发送也可以等程序下次启动时再次发送，看具体要求吧。</p>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://blog.devtang.com/2012/12/09/in-app-purchase-check-list/" target="_blank" rel="external">唐巧大神的博客</a></p>
+<p><a href="http://www.himigame.com/iphone-cocos2d/550.html" target="_blank" rel="external">李华明Himi 的博客</a></p>
+<p><a href="http://bbs.tairan.com/thread-13220-1-1.html" target="_blank" rel="external">iOS应用内置付费详尽攻略（全文）</a></p>
+<p><a href="http://blog.csdn.net/shenjie12345678/article/details/40978977" target="_blank" rel="external"> iOS应用程序内购/内付费</a></p>
+<p><a href="http://www.tairan.com/archives/2215/" target="_blank" rel="external">iOS内购IAP（In App Purchases）入门</a></p>
+<p><a href="http://www.lanrenios.com/tutorials/advanced/2012/1125/524.html" target="_blank" rel="external">iOS开发内购教程In App Purchase 需要了解的</a></p>
+<p><a href="http://www.cocoachina.com/bbs/read.php?tid=92060" target="_blank" rel="external">IAP相关资源收集及开发总结</a></p>
+<p><a href="http://www.cocoachina.com/ios/20140528/8585.html" target="_blank" rel="external">iOS内置付费开发笔记</a></p>
+<p><a href="http://www.cocoachina.com/ios/20150521/11889.html" target="_blank" rel="external">iOS证书说明和发布内购流程整理</a></p>
+<p><a href="http://blog.csdn.net/tspangle/article/details/39315355" target="_blank" rel="external">iOS- 给App添加内购&amp; 验证购买iOS7新特性 </a></p>
+<p><a href="http://www.cocoachina.com/ios/20150612/12110.html" target="_blank" rel="external">应用内购（In-App Purchase）常见问题解答</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得写的不错，那就打赏一下吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/weixin.png" alt="东折 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/内购/" rel="tag"># 内购</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/27/hexo 安装与配置/" rel="next" title="hexo 安装与配置">
+                <i class="fa fa-chevron-left"></i> hexo 安装与配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/13/iOS 开发中一些实用小代码/" rel="prev" title="iOS 开发中一些实用小代码">
+                iOS 开发中一些实用小代码 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/06/apple 内购流程梳理/"
+           data-title="apple 内购流程梳理" data-url="http://yoursite.com/2016/05/06/apple 内购流程梳理/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="东折" />
+          <p class="site-author-name" itemprop="name">东折</p>
+           
+              <p class="site-description motion-element" itemprop="description">君子见大水必观焉，何也？-- 其万折也必东，似志 ！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备部分"><span class="nav-number">1.</span> <span class="nav-text">准备部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个-AppID-和-BoundleID"><span class="nav-number">1.1.</span> <span class="nav-text">创建一个 AppID 和 BoundleID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建一个-App-应用"><span class="nav-number">1.2.</span> <span class="nav-text">新建一个 App 应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加付费项目"><span class="nav-number">1.3.</span> <span class="nav-text">添加付费项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加测试账户"><span class="nav-number">1.4.</span> <span class="nav-text">添加测试账户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码部分"><span class="nav-number">2.</span> <span class="nav-text">代码部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在工程里导入storekit-framework，在内购类导入-import"><span class="nav-number">2.1.</span> <span class="nav-text">在工程里导入storekit.framework，在内购类导入#import \</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端代码"><span class="nav-number">2.2.</span> <span class="nav-text">客户端代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器端处理"><span class="nav-number">2.3.</span> <span class="nav-text">服务器端处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">3.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">东折</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yulncbd"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,819 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本文介绍了 iOS 实际开发过程中的一些实用代码段。 
+代码段添加 pch 文件pre-Compile Header（预编译头文件），一般存放一些使用频率较高的代码或文件。尽量不要存放太多内容，如果预编译的代码太多的话，会增加程序的启动时间。
+Command + N 打开新建文件窗口，选择 iOS –&amp;gt; Other –&amp;gt; PCH File 创建 pch 文件，如图：
+
+点击 Next">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 开发中一些实用小代码">
+<meta property="og:url" content="http://yoursite.com/2016/05/13/iOS 开发中一些实用小代码/index.html">
+<meta property="og:site_name" content="Try and try again！The worst result is failure!">
+<meta property="og:description" content="本文介绍了 iOS 实际开发过程中的一些实用代码段。 
+代码段添加 pch 文件pre-Compile Header（预编译头文件），一般存放一些使用频率较高的代码或文件。尽量不要存放太多内容，如果预编译的代码太多的话，会增加程序的启动时间。
+Command + N 打开新建文件窗口，选择 iOS –&amp;gt; Other –&amp;gt; PCH File 创建 pch 文件，如图：
+
+点击 Next">
+<meta property="og:image" content="http://img1.ph.126.net/TWHKIs7KOKEVYrH0OUN6RA==/4900479344633179915.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/zmtb-Jx9rg0IPZhKeOMFBQ==/6598164880299623877.png">
+<meta property="og:image" content="http://img0.ph.126.net/z6EzTBPi-Eb8_1SolLq7IQ==/1623829140745544649.jpg">
+<meta property="og:image" content="http://img1.ph.126.net/9L6HSoGb2bNFQuVtxmmcQA==/4872331846962121723.jpg">
+<meta property="og:image" content="http://img0.ph.126.net/Jee22sslSfqPm6sSag5y6g==/4849532373849192267.jpg">
+<meta property="og:updated_time" content="2016-08-05T03:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 开发中一些实用小代码">
+<meta name="twitter:description" content="本文介绍了 iOS 实际开发过程中的一些实用代码段。 
+代码段添加 pch 文件pre-Compile Header（预编译头文件），一般存放一些使用频率较高的代码或文件。尽量不要存放太多内容，如果预编译的代码太多的话，会增加程序的启动时间。
+Command + N 打开新建文件窗口，选择 iOS –&amp;gt; Other –&amp;gt; PCH File 创建 pch 文件，如图：
+
+点击 Next">
+<meta name="twitter:image" content="http://img1.ph.126.net/TWHKIs7KOKEVYrH0OUN6RA==/4900479344633179915.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/05/13/iOS 开发中一些实用小代码/"/>
+
+
+
+
+
+  <title>iOS 开发中一些实用小代码 | Try and try again！The worst result is failure!</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Try and try again！The worst result is failure!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/13/iOS 开发中一些实用小代码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="东折">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try and try again！The worst result is failure!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 开发中一些实用小代码</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-13T00:00:00+08:00">
+                2016-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/05/13/iOS 开发中一些实用小代码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/13/iOS 开发中一些实用小代码/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文介绍了 iOS 实际开发过程中的一些实用代码段。 </p>
+<h2 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a>代码段</h2><h3 id="添加-pch-文件"><a href="#添加-pch-文件" class="headerlink" title="添加 pch 文件"></a>添加 pch 文件</h3><p>pre-Compile Header（预编译头文件），一般存放一些使用频率较高的代码或文件。尽量不要存放太多内容，如果预编译的代码太多的话，会增加程序的启动时间。</p>
+<p>Command + N 打开新建文件窗口，选择 iOS –&gt; Other –&gt; PCH File 创建 pch 文件，如图：</p>
+<p><img src="http://img1.ph.126.net/TWHKIs7KOKEVYrH0OUN6RA==/4900479344633179915.jpg" alt=""></p>
+<p>点击 <code>Next</code></p>
+<p><img src="http://img0.ph.126.net/zmtb-Jx9rg0IPZhKeOMFBQ==/6598164880299623877.png" alt=""></p>
+<p>点击 <code>Create</code></p>
+<p>PCH 文件创建好之后需要配置一下，如图：</p>
+<p><img src="http://img0.ph.126.net/z6EzTBPi-Eb8_1SolLq7IQ==/1623829140745544649.jpg" alt=""></p>
+<p>将图片中的 <code>Precompile Prefix Header</code> 右边的NO改为Yes。预编译后的pch文件会被缓存起来，可以提高编译速度。</p>
+<p>同时编辑 <code>Prefix Header</code> ，如图：</p>
+<p><img src="http://img1.ph.126.net/9L6HSoGb2bNFQuVtxmmcQA==/4872331846962121723.jpg" alt=""></p>
+<p>这是相对路径的写法，<code>pch</code>指的是项目名，<code>pch.pch</code>指的是项目中pch文件的文件名和后缀。</p>
+<p>到这里 PCH 文件已经创建并配置完成，最后一步是把需要预编译的代码放到 <code>pch.pch</code> 中，如图：</p>
+<p><img src="http://img0.ph.126.net/Jee22sslSfqPm6sSag5y6g==/4849532373849192267.jpg" alt=""></p>
+<p>这里我设置了两个宏定义(屏幕宽和屏幕高)并引入了一个<code>Common.h</code>的头文件。</p>
+<p>然后你就发现 kSCREEN_WIDTH 和 kSCREEN_HEIGHT 变成全局的了。</p>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// 验证邮箱</span><br><span class="line">+ (BOOL)validateEmail:(NSString *)email</span><br><span class="line">&#123;</span><br><span class="line">    NSString *pattern = @<span class="string">"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]&#123;2,4&#125;"</span>;</span><br><span class="line">    NSPredicate *pred = [NSPredicate predicateWithFormat:@<span class="string">"SELF MATCHES %@"</span>, pattern];</span><br><span class="line">    BOOL isMatch = [pred evaluateWithObject:email];</span><br><span class="line">    <span class="built_in">return</span> isMatch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 验证手机号</span><br><span class="line">+ (BOOL)validateMobile:(NSString *)mobile</span><br><span class="line">&#123;</span><br><span class="line">    // 以1开头，第二位是3，5，7，8的11位整数</span><br><span class="line">    NSString *pattern = @<span class="string">"^1[3578]\\d&#123;9&#125;$"</span>;</span><br><span class="line">    NSPredicate *pred = [NSPredicate predicateWithFormat:@<span class="string">"SELF MATCHES %@"</span>, pattern];</span><br><span class="line">    BOOL isMatch = [pred evaluateWithObject:mobile];</span><br><span class="line">    <span class="built_in">return</span> isMatch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 验证用户名</span><br><span class="line">+ (BOOL)validateNickName:(NSString *)userName</span><br><span class="line">&#123;</span><br><span class="line">    //2-10个中英文、数字和下划线</span><br><span class="line">    //NSString *pattern = @<span class="string">"[\u4e00-\u9fa5_a-zA-Z0-9]&#123;2,10&#125;"</span>;</span><br><span class="line">    //  \S匹配任意可见字符</span><br><span class="line">    NSString *pattern = @<span class="string">"\\S&#123;0,10&#125;"</span>;</span><br><span class="line">    NSPredicate *pred = [NSPredicate predicateWithFormat:@<span class="string">"SELF MATCHES %@"</span>, pattern];</span><br><span class="line">    BOOL isMatch = [pred evaluateWithObject:userName];</span><br><span class="line">    <span class="built_in">return</span> isMatch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 验证密码</span><br><span class="line">+ (BOOL)validatePassword:(NSString *)password</span><br><span class="line">&#123;</span><br><span class="line">    //6-20位的数字字母组合-- ^表示已...开头，$表示已...结尾</span><br><span class="line">    NSString *pattern = @<span class="string">"^[a-zA-Z0-9]&#123;6,18&#125;+$"</span>;</span><br><span class="line">    NSPredicate *pred = [NSPredicate predicateWithFormat:@<span class="string">"SELF MATCHES %@"</span>, pattern];</span><br><span class="line">    BOOL isMatch = [pred evaluateWithObject:password];</span><br><span class="line">    <span class="built_in">return</span> isMatch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考网站：<a href="http://blog.csdn.net/chaoyuan899/article/details/38583759" target="_blank" rel="external">IOS常用正则表达式 </a></p>
+<h3 id="点击状态栏不返回顶部问题"><a href="#点击状态栏不返回顶部问题" class="headerlink" title="点击状态栏不返回顶部问题"></a>点击状态栏不返回顶部问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic) BOOL  scrollsToTop __TVOS_PROHIBITED;          // default is YES.</span><br></pre></td></tr></table></figure>
+<p>官方文档说：当一个控制器只有一个 scrollView 或 scrollView 的子类（tableView，collectionView等），并且把这个属性设置为 YES，点击状态栏才能回到顶部；当有2个或以上的scrollView，系统不知道你需要操作的是那个scrollView，因此需要将其他的scrollView的这个属性设置为 NO。</p>
+<h3 id="导航栏和状态栏"><a href="#导航栏和状态栏" class="headerlink" title="导航栏和状态栏"></a>导航栏和状态栏</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 隐藏导航栏</span><br><span class="line">[self.navigationController <span class="built_in">set</span>NavigationBarHidden:YES animated:YES];</span><br><span class="line"></span><br><span class="line">// 隐藏状态栏</span><br><span class="line">[[UIApplication sharedApplication] <span class="built_in">set</span>StatusBarHidden:YES];</span><br><span class="line"></span><br><span class="line">// 设置导航栏是否半透明</span><br><span class="line">self.navigationController.navigationBar.translucent = YES;</span><br><span class="line"></span><br><span class="line">// 导航栏变为透明</span><br><span class="line">[self.navigationController.navigationBar <span class="built_in">set</span>BackgroundImage:[UIImage new] <span class="keyword">for</span>BarMetrics:0];</span><br><span class="line">// 让黑线消失的方法</span><br><span class="line">self.navigationController.navigationBar.shadowImage=[UIImage new];</span><br><span class="line"></span><br><span class="line">// 状态栏的网络活动风火轮是否旋转</span><br><span class="line">[UIApplication sharedApplication].networkActivityIndicatorVisible = YES ; //默认值是NO。</span><br></pre></td></tr></table></figure>
+<h3 id="for循环和while循环"><a href="#for循环和while循环" class="headerlink" title="for循环和while循环"></a>for循环和while循环</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span> (NSString *str <span class="keyword">in</span> array) &#123;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 先执行i = 0（只执行一次）；再执行循环体，最后执行i++；</span><br><span class="line"><span class="keyword">for</span> (int i=0; i&lt;10; i++) &#123;</span><br><span class="line">// 循环体</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 等同于<span class="keyword">for</span>循环</span><br><span class="line">// 当循环到结尾然后需要从头再次循环时使用，<span class="keyword">for</span>循环不可以。</span><br><span class="line">int i = 0;</span><br><span class="line"><span class="keyword">while</span> (i &lt; 10) &#123;  </span><br><span class="line">    <span class="keyword">if</span>(i == 9)</span><br><span class="line">    &#123;</span><br><span class="line">         i = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    NSLog(@<span class="string">"i: %d"</span>, i);  </span><br><span class="line">    i ++;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="截取屏幕图片"><a href="#截取屏幕图片" class="headerlink" title="截取屏幕图片"></a>截取屏幕图片</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//创建一个基于位图的图形上下文并指定大小为CGSizeMake(200,400) </span><br><span class="line">UIGraphicsBeginImageContext(CGSizeMake(200,400)); </span><br><span class="line"> </span><br><span class="line">//renderInContext 呈现接受者及其子范围到指定的上下文 </span><br><span class="line">//self.view.layer 表示要截屏的视图</span><br><span class="line">[self.view.layer renderInContext:UIGraphicsGetCurrentContext()]; </span><br><span class="line"></span><br><span class="line">//返回一个基于当前图形上下文的图片 </span><br><span class="line">UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext(); </span><br><span class="line"></span><br><span class="line">//移除栈顶的基于当前位图的图形上下文 </span><br><span class="line">UIGraphicsEndImageContext(); </span><br><span class="line"></span><br><span class="line">//以png格式返回指定图片的数据 </span><br><span class="line">imageData = UIImagePNGRepresentation(aImage);</span><br></pre></td></tr></table></figure>
+<h3 id="图片压缩"><a href="#图片压缩" class="headerlink" title="图片压缩"></a>图片压缩</h3><p>方案一：文件体积变小，但是像素没变，长宽尺寸不变，可能导致图片质量下降，并且有一个压缩最小值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSData *data=UIImageJPEGRepresentation(image, 0.0f);</span><br></pre></td></tr></table></figure>
+<p>方案二：裁剪图片，图片像素数减少，长宽尺寸减小，图片体积也减少</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (NSData *)imageWithImage:(UIImage*)image</span><br><span class="line">          scaledToSize:(CGSize)newSize;</span><br><span class="line">&#123;</span><br><span class="line">    UIGraphicsBeginImageContext(newSize);</span><br><span class="line">    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];</span><br><span class="line">    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();</span><br><span class="line">    UIGraphicsEndImageContext();</span><br><span class="line">    // 有时需要两种方案配合使用</span><br><span class="line">    <span class="built_in">return</span> UIImageJPEGRepresentation(newImage, 0.8);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];</span><br><span class="line">[manager POST:url parameters:parameters constructingBodyWithBlock:^(id&lt;AFMultipartFormData&gt; formData) &#123;</span><br><span class="line">    </span><br><span class="line">    NSData *imgData = UIImageJPEGRepresentation(image, 0.5);</span><br><span class="line">    /**</span><br><span class="line">     *  name：部分是服务器用来解析的字段</span><br><span class="line">     *  fileName：则是直接上传上去的图片，注意一定要加 .jpg或者.png，（这个根据你得到这个imgData是通过jepg还是png的方式来获取决定）。</span><br><span class="line">     *  mimeType：值也要与上面的类型对应，网上看到有的说直接写成 @<span class="string">"image/*"</span>， 据说也是可以的， 没验证过。</span><br><span class="line">     */</span><br><span class="line">    [formData appendPartWithFileData:imgData name:@<span class="string">"avatar"</span> fileName:@<span class="string">"avatar.jpg"</span> mimeType:@<span class="string">"image/jpeg"</span>];</span><br><span class="line">    </span><br><span class="line">&#125; success:^(AFHTTPRequestOperation *operation, id responseObject) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; failure:^(AFHTTPRequestOperation *operation, NSError *error) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<h3 id="UITableViewWrapperView-和UITableView-的-frame-不同"><a href="#UITableViewWrapperView-和UITableView-的-frame-不同" class="headerlink" title="UITableViewWrapperView 和UITableView 的 frame 不同"></a>UITableViewWrapperView 和UITableView 的 frame 不同</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">解决方案</span><br><span class="line"> - (void)viewWillLayoutSubviews</span><br><span class="line">&#123;</span><br><span class="line">    [super viewWillLayoutSubviews];</span><br><span class="line">    </span><br><span class="line">    self.tableView.contentInset = UIEdgeInsetsZero;</span><br><span class="line">    self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="iOS-自定义TextView-TextField光标颜色、长度或高度"><a href="#iOS-自定义TextView-TextField光标颜色、长度或高度" class="headerlink" title="iOS 自定义TextView/TextField光标颜色、长度或高度"></a>iOS 自定义TextView/TextField光标颜色、长度或高度</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">1. TextView/TextField光标颜色可通过设置tintColor属性进行修改:</span><br><span class="line"></span><br><span class="line">self.textView.tintColor = [UIColor redColor];</span><br><span class="line"></span><br><span class="line">2. TextView/TextField自定义光标长度或高度, 可通过重写父类方法caretRectForPosition:实现, 具体设置如下:</span><br><span class="line"></span><br><span class="line">@interface CustomTextView : UITextView</span><br><span class="line"></span><br><span class="line">重写父类方法: </span><br><span class="line"></span><br><span class="line">- (CGRect)caretRectForPosition:(UITextPosition *)position</span><br><span class="line">&#123;</span><br><span class="line">    CGRect originalRect = [super caretRectForPosition:position];</span><br><span class="line">    originalRect.origin.x = 8;</span><br><span class="line">    originalRect.origin.y = 10;</span><br><span class="line">    originalRect.size.height = self.font.lineHeight;</span><br><span class="line">    originalRect.size.width = 1;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">return</span> originalRect;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="输入框明文和密文切换问题"><a href="#输入框明文和密文切换问题" class="headerlink" title="输入框明文和密文切换问题"></a>输入框明文和密文切换问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">1. 明文和密文切换末尾空白</span><br><span class="line"></span><br><span class="line">// 在转换方法中添加以下代码</span><br><span class="line">- (void)switchAction:(id)sender &#123;</span><br><span class="line">    self.passwordTextField.secureTextEntry = !self.passwordTextField.secureTextEntry;</span><br><span class="line">    NSString* text = self.passwordTextField.text;</span><br><span class="line">    self.passwordTextField.text = @<span class="string">" "</span>;</span><br><span class="line">    self.passwordTextField.text = text;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">2. 明文和密文切换再次输入会清空输入内容</span><br><span class="line"></span><br><span class="line">// 在代理方法中添加以下代码</span><br><span class="line"></span><br><span class="line">-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string&#123;</span><br><span class="line"></span><br><span class="line">    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];</span><br><span class="line">    <span class="keyword">if</span> (textField == _passwordTF &amp;&amp; textField.isSecureTextEntry ) &#123;</span><br><span class="line">        textField.text = toBeString;</span><br><span class="line">        <span class="built_in">return</span> NO;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="shareSDK问题"><a href="#shareSDK问题" class="headerlink" title="shareSDK问题"></a>shareSDK问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//   新浪微博分享--解决does multipart has image?问题， <span class="string">"说明传的图片的地址新浪微博解析不出来，会失败，可能是你的图片的url（测试地址，内网），新浪访问不了，再就是将ip换成域名即可。"</span></span><br><span class="line">//  我解决的办法是：将设置参数方法的第三个参数image，由传链接的形式，改为直接用UIImage类型的对象</span><br><span class="line"></span><br><span class="line">NSData * image_data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:_imageUrl]];</span><br><span class="line">UIImage *sina_image = [UIImage imageWithData:image_data];</span><br><span class="line">id&lt;ISSCAttachment&gt;  _image = [ShareSDK pngImageWithImage:sina_image];</span><br><span class="line"></span><br><span class="line">// 第三方登录--QQ</span><br><span class="line">// 当客户端未安装时，不会调用网页版QQ。关于QZone网页授权：1，以前申请的应用可以网页授权，但现在新申请的网页应用不可以网页授权。2，ShareSDK之前因为用户反馈，有网页授权会通不过审核，所以不得已去掉了网页授权。</span><br></pre></td></tr></table></figure>
+<h3 id="textView与textField限制输入字数问题"><a href="#textView与textField限制输入字数问题" class="headerlink" title="textView与textField限制输入字数问题"></a>textView与textField限制输入字数问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 一般采用这个方法</span><br><span class="line">- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text</span><br><span class="line">&#123;</span><br><span class="line">    //判断输入的字符，是否超过界限</span><br><span class="line">    NSString *str = [NSString stringWithFormat:@<span class="string">"%@%@"</span>, textView.text, text];</span><br><span class="line">    <span class="keyword">if</span> (str.length &gt; kMaxLen)</span><br><span class="line">    &#123;</span><br><span class="line">        textView.text = [str substringToIndex:kMaxLen];</span><br><span class="line">        <span class="built_in">return</span> NO;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> // 但是，在汉语拼音输入状态下，如果有键盘联想汉字输入，则无法回调到该函数，所以可以一直联想输入下去，做不到限制字符数量的目的，为了解决这个问题，我们在textViewDidChange进行限制。</span><br><span class="line"></span><br><span class="line">- (void)textViewDidChange:(UITextView *)textView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ( textView.text.length &gt; kMaxLen)</span><br><span class="line">    &#123;</span><br><span class="line">        textView.text = [textView.text substringToIndex:kMaxLen];</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">// 此时，如果在拼音状态下输入会有crash ,因为汉语拼音状态下，联想出的汉字等待用户选择，在用户选择前的状态下，不能改变textView.text。解决办法：</span><br><span class="line"></span><br><span class="line">- (void)textViewDidChange:(UITextView *)textView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (textView.markedTextRange == nil &amp;&amp; textView.text.length &gt; kMaxLen)  </span><br><span class="line">    //加上 textView.markedTextRange == nil判断，当此属性为nil时，代表不在这种联想输入等待确定状态。</span><br><span class="line">    &#123;</span><br><span class="line">        textView.text = [textView.text substringToIndex:kMaxLen];</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="修改tableView的分割线"><a href="#修改tableView的分割线" class="headerlink" title="修改tableView的分割线"></a>修改tableView的分割线</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">if</span> ([tableView respondsToSelector:@selector (<span class="built_in">set</span>SeparatorInset:)]) &#123;</span><br><span class="line"></span><br><span class="line">        [tableView <span class="built_in">set</span>SeparatorInset:UIEdgeInsetsZero];</span><br><span class="line">        [tableView <span class="built_in">set</span>SeparatorColor:kGetColor ( 18.0 , 18.0 , 18.0 )];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="UITableView-的plain样式分组名悬浮问题"><a href="#UITableView-的plain样式分组名悬浮问题" class="headerlink" title="UITableView 的plain样式分组名悬浮问题"></a>UITableView 的plain样式分组名悬浮问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pragma mark - 禁止session滚动</span></span><br><span class="line">-  (void)scrollViewDidScroll:(UIScrollView *)scrollView &#123;</span><br><span class="line">-  </span><br><span class="line">    <span class="keyword">if</span> (scrollView == _tableView)</span><br><span class="line">    &#123;</span><br><span class="line">        CGFloat sectionHeaderHeight = 25; //sectionHeaderHeight</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (scrollView.contentOffset.y&lt;=sectionHeaderHeight&amp;&amp;scrollView.contentOffset.y&gt;=0) &#123;</span><br><span class="line">        </span><br><span class="line">            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);</span><br><span class="line">            </span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (scrollView.contentOffset.y&gt;=sectionHeaderHeight) &#123;</span><br><span class="line">        </span><br><span class="line">            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);</span><br><span class="line">            </span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            scrollView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="iOS-支持-ipv6-问题"><a href="#iOS-支持-ipv6-问题" class="headerlink" title="iOS 支持 ipv6 问题"></a>iOS 支持 ipv6 问题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">1.AFNetworking 换成最新版本</span><br><span class="line"></span><br><span class="line">2.友盟等与网络有关的第三方SDK换成最新版本</span><br><span class="line"></span><br><span class="line">3.服务器请求地址不要使用ip，要使用域名</span><br><span class="line"></span><br><span class="line">4.如果用到底层API需要单独处理，尽量使用NSURLSession</span><br><span class="line"></span><br><span class="line">5.检测网络状况的类在ios8一下可能会有点问题</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">### 判断字符串是否为空</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">+ (BOOL)isEmpty:(NSString *)str</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!str) &#123;</span><br><span class="line">        <span class="built_in">return</span> YES;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        NSCharacterSet *<span class="built_in">set</span>=[NSCharacterSet whitespaceAndNewlineCharacterSet];</span><br><span class="line">        </span><br><span class="line">        NSString *trimedString=[str stringByTrimmingCharactersInSet:<span class="built_in">set</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (trimedString.length==0) &#123;</span><br><span class="line">            <span class="built_in">return</span> YES;</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">return</span> NO;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="URLDecode-解码"><a href="#URLDecode-解码" class="headerlink" title="URLDecode 解码"></a>URLDecode 解码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+ (NSString *)URLDecodedString:(NSString *)str</span><br><span class="line">&#123;</span><br><span class="line">    NSString *decodedString=(__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL, (__bridge CFStringRef)str, CFSTR(<span class="string">""</span>), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">return</span> decodedString;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="textView-根据输入内容改变高度（最多显示5行）"><a href="#textView-根据输入内容改变高度（最多显示5行）" class="headerlink" title="textView 根据输入内容改变高度（最多显示5行）"></a>textView 根据输入内容改变高度（最多显示5行）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">- (void)textViewDidChange:(UITextView *)textView</span><br><span class="line">&#123;</span><br><span class="line">    NSString *textViewText = [textView.text stringByReplacingOccurrencesOfString:@<span class="string">" "</span> withString:@<span class="string">""</span>];</span><br><span class="line">    </span><br><span class="line">    //判断输入的字符是否是空格</span><br><span class="line">    <span class="keyword">if</span> (![self isEmpty:textViewText]) &#123;</span><br><span class="line"></span><br><span class="line">        CGFloat h = [inputTextView.layoutManager usedRectForTextContainer:inputTextView.textContainer].size.height;</span><br><span class="line">        inputTextView.contentSize = CGSizeMake(inputTextView.contentSize.width, h+20);</span><br><span class="line">        CGFloat five_h = hight_text_one*5.0f;</span><br><span class="line">        h = h&gt;five_h?five_h:h;</span><br><span class="line">        CGRect frame = inputTextView.frame;</span><br><span class="line">        CGFloat diff = toolBar.frame.size.height - inputTextView.frame.size.height;</span><br><span class="line">        <span class="keyword">if</span> (frame.size.height == h+20) &#123;</span><br><span class="line">            <span class="keyword">if</span> (h == five_h) &#123;</span><br><span class="line">                [inputTextView <span class="built_in">set</span>ContentOffset:CGPointMake(0, inputTextView.contentSize.height - h - 20) animated:NO];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        frame.size.height = h+20;</span><br><span class="line">        inputTextView.frame = frame;</span><br><span class="line">        [inputTextView <span class="built_in">set</span>ContentOffset:CGPointZero animated:YES];</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      // 处理输入为空格的情况</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="“Request-failed-unacceptable-content-type-text-plain-text-html-”-解决方案"><a href="#“Request-failed-unacceptable-content-type-text-plain-text-html-”-解决方案" class="headerlink" title="“Request failed: unacceptable content-type: text/plain(text/html)” 解决方案"></a>“Request failed: unacceptable content-type: text/plain(text/html)” 解决方案</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">此时需要修改AFNetworking可接收的Content-Type，前往AFNetworking源代码目录找到AFURLResponseSerialization.m文件将里面的代码：</span><br><span class="line">self.acceptableContentTypes =[NSSetsetWithObjects:@<span class="string">"application/json"</span>,@<span class="string">"text/json"</span>,@<span class="string">"text/javascript"</span>,nil];</span><br><span class="line">修改为：</span><br><span class="line"></span><br><span class="line">self.acceptableContentTypes =[NSSet <span class="built_in">set</span>WithObjects:@<span class="string">"application/json"</span>,@<span class="string">"text/json"</span>,@<span class="string">"text/javascript"</span>,@<span class="string">"text/plain"</span> , nil]; </span><br><span class="line"></span><br><span class="line">self.acceptableContentTypes =[NSSet <span class="built_in">set</span>WithObjects:@<span class="string">"application/json"</span>,@<span class="string">"text/json"</span>,@<span class="string">"text/javascript"</span>,@<span class="string">"text/html"</span>,nil];</span><br></pre></td></tr></table></figure>
+<h3 id="UILabel的行间距，字间距以及高度计算"><a href="#UILabel的行间距，字间距以及高度计算" class="headerlink" title="UILabel的行间距，字间距以及高度计算"></a>UILabel的行间距，字间距以及高度计算</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得写的不错，那就打赏一下吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/weixin.png" alt="东折 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/06/apple 内购流程梳理/" rel="next" title="apple 内购流程梳理">
+                <i class="fa fa-chevron-left"></i> apple 内购流程梳理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/18/iOS时间格式转换总结/" rel="prev" title="iOS时间格式转换总结">
+                iOS时间格式转换总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/13/iOS 开发中一些实用小代码/"
+           data-title="iOS 开发中一些实用小代码" data-url="http://yoursite.com/2016/05/13/iOS 开发中一些实用小代码/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="东折" />
+          <p class="site-author-name" itemprop="name">东折</p>
+           
+              <p class="site-description motion-element" itemprop="description">君子见大水必观焉，何也？-- 其万折也必东，似志 ！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码段"><span class="nav-number">1.</span> <span class="nav-text">代码段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加-pch-文件"><span class="nav-number">1.1.</span> <span class="nav-text">添加 pch 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">1.2.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#点击状态栏不返回顶部问题"><span class="nav-number">1.3.</span> <span class="nav-text">点击状态栏不返回顶部问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导航栏和状态栏"><span class="nav-number">1.4.</span> <span class="nav-text">导航栏和状态栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for循环和while循环"><span class="nav-number">1.5.</span> <span class="nav-text">for循环和while循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#截取屏幕图片"><span class="nav-number">1.6.</span> <span class="nav-text">截取屏幕图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片压缩"><span class="nav-number">1.7.</span> <span class="nav-text">图片压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传图片"><span class="nav-number">1.8.</span> <span class="nav-text">上传图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UITableViewWrapperView-和UITableView-的-frame-不同"><span class="nav-number">1.9.</span> <span class="nav-text">UITableViewWrapperView 和UITableView 的 frame 不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS-自定义TextView-TextField光标颜色、长度或高度"><span class="nav-number">1.10.</span> <span class="nav-text">iOS 自定义TextView/TextField光标颜色、长度或高度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入框明文和密文切换问题"><span class="nav-number">1.11.</span> <span class="nav-text">输入框明文和密文切换问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shareSDK问题"><span class="nav-number">1.12.</span> <span class="nav-text">shareSDK问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#textView与textField限制输入字数问题"><span class="nav-number">1.13.</span> <span class="nav-text">textView与textField限制输入字数问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改tableView的分割线"><span class="nav-number">1.14.</span> <span class="nav-text">修改tableView的分割线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UITableView-的plain样式分组名悬浮问题"><span class="nav-number">1.15.</span> <span class="nav-text">UITableView 的plain样式分组名悬浮问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS-支持-ipv6-问题"><span class="nav-number">1.16.</span> <span class="nav-text">iOS 支持 ipv6 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URLDecode-解码"><span class="nav-number">1.17.</span> <span class="nav-text">URLDecode 解码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#textView-根据输入内容改变高度（最多显示5行）"><span class="nav-number">1.18.</span> <span class="nav-text">textView 根据输入内容改变高度（最多显示5行）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“Request-failed-unacceptable-content-type-text-plain-text-html-”-解决方案"><span class="nav-number">1.19.</span> <span class="nav-text">“Request failed: unacceptable content-type: text/plain(text/html)” 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UILabel的行间距，字间距以及高度计算"><span class="nav-number">1.20.</span> <span class="nav-text">UILabel的行间距，字间距以及高度计算</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">东折</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yulncbd"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

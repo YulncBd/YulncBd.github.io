@@ -1,0 +1,855 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在iOS程序开发中，有时需要将时间转换成我们需要的格式。如果服务器返回的时间格式是时间戳，转换起来相对比较简单；但是如果给的不是时间戳转换起来可能稍微麻烦一点。返回的什么格式可以协商，返回的时间的样式要统一，不要这里返回时间戳，那里返回标准时间。
+UTC、GMT和时间戳简介GMT格林尼治标准时间（Greenwich Mean Time，GMT）是指位于英国伦敦郊区的皇家格林尼治天文台的标准时间，即">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS时间格式转换总结">
+<meta property="og:url" content="http://yoursite.com/2016/05/18/iOS时间格式转换总结/index.html">
+<meta property="og:site_name" content="Try and try again！The worst result is failure!">
+<meta property="og:description" content="在iOS程序开发中，有时需要将时间转换成我们需要的格式。如果服务器返回的时间格式是时间戳，转换起来相对比较简单；但是如果给的不是时间戳转换起来可能稍微麻烦一点。返回的什么格式可以协商，返回的时间的样式要统一，不要这里返回时间戳，那里返回标准时间。
+UTC、GMT和时间戳简介GMT格林尼治标准时间（Greenwich Mean Time，GMT）是指位于英国伦敦郊区的皇家格林尼治天文台的标准时间，即">
+<meta property="og:updated_time" content="2016-05-18T08:19:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS时间格式转换总结">
+<meta name="twitter:description" content="在iOS程序开发中，有时需要将时间转换成我们需要的格式。如果服务器返回的时间格式是时间戳，转换起来相对比较简单；但是如果给的不是时间戳转换起来可能稍微麻烦一点。返回的什么格式可以协商，返回的时间的样式要统一，不要这里返回时间戳，那里返回标准时间。
+UTC、GMT和时间戳简介GMT格林尼治标准时间（Greenwich Mean Time，GMT）是指位于英国伦敦郊区的皇家格林尼治天文台的标准时间，即">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/05/18/iOS时间格式转换总结/"/>
+
+
+
+
+
+  <title>iOS时间格式转换总结 | Try and try again！The worst result is failure!</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Try and try again！The worst result is failure!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/18/iOS时间格式转换总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="东折">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Try and try again！The worst result is failure!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS时间格式转换总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-18T10:22:11+08:00">
+                2016-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/05/18/iOS时间格式转换总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/18/iOS时间格式转换总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在iOS程序开发中，有时需要将时间转换成我们需要的格式。如果服务器返回的时间格式是时间戳，转换起来相对比较简单；但是如果给的不是时间戳转换起来可能稍微麻烦一点。返回的什么格式可以协商，返回的时间的样式要统一，不要这里返回时间戳，那里返回标准时间。</p>
+<h2 id="UTC、GMT和时间戳简介"><a href="#UTC、GMT和时间戳简介" class="headerlink" title="UTC、GMT和时间戳简介"></a>UTC、GMT和时间戳简介</h2><h3 id="GMT"><a href="#GMT" class="headerlink" title="GMT"></a>GMT</h3><p>格林尼治标准时间（Greenwich Mean Time，GMT）是指位于英国伦敦郊区的皇家格林尼治天文台的标准时间，即本初子午线时间。</p>
+<p>由于地球在它的椭圆轨道里的运动速度不均匀，这个时刻可能与实际的太阳时有误差，最大误差达16分钟。</p>
+<p>地球每天的自转是有些不规则的，而且正在缓慢减速，因此格林尼治时间已经不再被作为标准时间使用。</p>
+<h3 id="UTC"><a href="#UTC" class="headerlink" title="UTC"></a>UTC</h3><p>协调世界时间（又称世界标准时间），与 GMT 一样都是本初子午线时间，只不过 UTC 是经过协调后的世界时间，比 GMT 更加准确。</p>
+<p>全球共有二十四个时区，格林尼治时间指本初子午线时间（东经和西经交界处），北京位于东八区。</p>
+<p>时区差东为正，西为负。因此，把东八区时区差记为 +0800。</p>
+<h3 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h3><p>时间戳是指格林尼治时间1970年01月01日00时00分00秒(北京时间1970年01月01日08时00分00秒)起至现在的总秒数。</p>
+<h2 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h2><h3 id="时间处理类简介"><a href="#时间处理类简介" class="headerlink" title="时间处理类简介"></a>时间处理类简介</h3><p> NSDate</p>
+<p> 用于描述一个特定的时间点，可以获取时间，但没法单独获取年，月，日等信息。 提供方法来获得时间（过去，当前，未来都可以），计算两个时间之间的间隔，比较时间，描述时间内容。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 获取当前时间</span><br><span class="line">NSDate *date = [NSDate date];</span><br></pre></td></tr></table></figure>
+<p> NSDateFormatter</p>
+<p> 用于描述 <code>date</code> 的显示格式，配合 NSDate 使用。可以设置时间显示格式，日期格式，时间格式，还有时区等等，最方便的是，你还可以设置AM/PM，月份，星期的显示内容。</p>
+<p> NSDateComponents</p>
+<p> 可以得到我们比较熟悉的年月日时分秒信息，在一些计算显示场合很有用处，用NSDate类是无法单独来获得每一个元素信息的，必须使用这个NSDateComponents类。</p>
+<p> NSCalendar</p>
+<p>用来描述一种特定的日历。同时还提供了大部分基于时间计算的接口，并且把NSDate类和NSDateComponents类联系了起来。</p>
+<h3 id="字符说明"><a href="#字符说明" class="headerlink" title="字符说明"></a>字符说明</h3><p>(:)</p>
+<p>时间分隔符。在某些区域设置中，可以使用其他字符表示时间分隔符。时间分隔符在格式化时间值时分隔小时、分钟和秒。格式化输出中用作时间分隔符的实际字符由您的应用程序的当前区域性值确定。</p>
+<p>(/)</p>
+<p>日期分隔符。在某些区域设置中，可以使用其他字符表示日期分隔符。日期分隔符在格式化日期值时分隔日、月和年。格式化输出中用作日期分隔符的实际字符由您的应用程序的当前区域性确定。</p>
+<p>(%)</p>
+<p>用于表明不论尾随什么字母，随后字符都应该以单字母格式读取。也用于表明单字母格式应以用户定义格式读取。有关更多详细信息，请参见下面的内容。</p>
+<p>d</p>
+<p>将日显示为不带前导零的数字（如 1）。如果这是用户定义的数字格式中的唯一字符，请使用 %d。</p>
+<p>dd</p>
+<p>将日显示为带前导零的数字（如 01）。</p>
+<p>EEE</p>
+<p>将日显示为缩写形式（例如 Sun）。</p>
+<p>EEEE</p>
+<p>将日显示为全名（例如 Sunday）。</p>
+<p>M</p>
+<p>将月份显示为不带前导零的数字（如一月表示为 1）。如果这是用户定义的数字格式中的唯一字符，请使用 %M。</p>
+<p>MM</p>
+<p>将月份显示为带前导零的数字（例如 01/12/01）。</p>
+<p>MMM</p>
+<p>将月份显示为缩写形式（例如 Jan）。</p>
+<p>MMMM</p>
+<p>将月份显示为完整月份名（例如 January）。</p>
+<p>gg</p>
+<p>显示时代/纪元字符串（例如 A.D.）</p>
+<p>h</p>
+<p>使用 12 小时制将小时显示为不带前导零的数字（例如 1:15:15 PM）。如果这是用户定义的数字格式中的唯一字符，请使用 %h。</p>
+<p>hh</p>
+<p>使用 12 小时制将小时显示为带前导零的数字（例如 01:15:15 PM）。</p>
+<p>H</p>
+<p>使用 24 小时制将小时显示为不带前导零的数字（例如 1:15:15）。如果这是用户定义的数字格式中的唯一字符，请使用 %H。</p>
+<p>HH</p>
+<p>使用 24 小时制将小时显示为带前导零的数字（例如 01:15:15）。</p>
+<p>m</p>
+<p>将分钟显示为不带前导零的数字（例如 12:1:15）。如果这是用户定义的数字格式中的唯一字符，请使用 %m。</p>
+<p>mm</p>
+<p>将分钟显示为带前导零的数字（例如 12:01:15）。</p>
+<p>s</p>
+<p>将秒显示为不带前导零的数字（例如 12:15:5）。如果这是用户定义的数字格式中的唯一字符，请使用 %s。</p>
+<p>ss</p>
+<p>将秒显示为带前导零的数字（例如 12:15:05）。</p>
+<p>S（SS，SSS）</p>
+<p>显示毫秒</p>
+<p>aa（a）</p>
+<p>对于使用 12 小时制的区域设置，对中午之前任一小时显示大写的 AM，对中午到 11:59 P.M 之间的任一小时显示大写的 PM。</p>
+<p>对于使用 24 小时制的区域设置，不显示任何字符。</p>
+<p>y</p>
+<p>将年份 (0-9) 显示为不带前导零的数字。如果这是用户定义的数字格式中的唯一字符，请使用 %y。</p>
+<p>yy</p>
+<p>以带前导零的两位数字格式显示年份（如果适用）。</p>
+<p>yyy</p>
+<p>以四位数字格式显示年份。</p>
+<p>yyyy</p>
+<p>以四位数字格式显示年份。</p>
+<p>z</p>
+<p>显示不带前导零的时区偏移量（如 -8）。如果这是用户定义的数字格式中的唯一字符，请使用 %z。</p>
+<p>zz</p>
+<p>显示带前导零的时区偏移量（例如 -08）</p>
+<p>zzz</p>
+<p>显示完整的时区偏移量（例如 -08:00）</p>
+<h3 id="格式显示"><a href="#格式显示" class="headerlink" title="格式显示"></a>格式显示</h3><p>M/d/yy —–&gt; 12/7/58</p>
+<p>d-MMM —–&gt; 7-Dec</p>
+<p>d-MMMM-yy —–&gt; 7-December-58</p>
+<p>d MMMM —–&gt; 7 December</p>
+<p>MMMM yy —–&gt; December 58</p>
+<p>hh:mm tt —–&gt; 08:50 PM</p>
+<p>h:mm:ss t —–&gt; 8:50:35 P</p>
+<p>H:mm —–&gt; 20:50</p>
+<p>H:mm:ss —–&gt; 20:50:35</p>
+<p>M/d/yyyy H:mm —–&gt; 12/7/1958 20:50</p>
+<p>yyyy-MM-dd HH:mm:ss.SSS —–&gt; 2014-09-10 09:12:10.000</p>
+<p>yyyy-MM-dd HH:mm:ss —–&gt;  2014-09-10 09:12:10</p>
+<p>yyyy-MM-dd —–&gt;  2014-09-10 </p>
+<p>MM dd yyyy —–&gt; 09 10 2014</p>
+<p>EEE, yyyy-MM-dd HH:mm:ss —–&gt; Tue 2014-09-10 09:12:10</p>
+<h3 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">// 获取当前时间</span><br><span class="line">NSDate *date = [NSDate date];</span><br><span class="line"></span><br><span class="line">// 根据时间戳获取时间</span><br><span class="line">NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];</span><br><span class="line"></span><br><span class="line">// 距离当前时间 timeInterval 秒的时间</span><br><span class="line">NSDate *date = [NSDate dateWithTimeIntervalSinceNow:timeInterval];</span><br><span class="line"></span><br><span class="line">// 将 Jul 22, 2014 9:00:00 AM 格式的时间转换成时间戳</span><br><span class="line">NSString *time = @<span class="string">"Jul 22, 2014 9:00:00 AM"</span>;</span><br><span class="line">NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>DateFormat:@<span class="string">"MMM dd, yyyy hh:mm:ss aa"</span>];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>Locale:[[NSLocale alloc] initWithLocaleIdentifier:@<span class="string">"en_US_POSIX"</span>]];</span><br><span class="line">// 使用系统默认的会有8个小时的时差</span><br><span class="line">// [dateFormatter <span class="built_in">set</span>TimeZone:[NSTimeZone systemTimeZone]];</span><br><span class="line">// 使用这种方式也可以</span><br><span class="line">// [dateFormatter <span class="built_in">set</span>TimeZone:[NSTimeZone timeZoneForSecondsFromGMT:8]];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>TimeZone:[NSTimeZone timeZoneWithName:@<span class="string">"UTC"</span>]]; // 或GMT</span><br><span class="line">NSDate *date = [dateFormatter dateFromString:time]; </span><br><span class="line">NSLog(@<span class="string">"date:%@"</span>,date);</span><br><span class="line">NSTimeInterval timeInterval = [date timeIntervalSince1970];</span><br><span class="line">NSLog(@<span class="string">"%f"</span>,timeInterval);</span><br><span class="line"></span><br><span class="line">// 将20110826134106转换成特定的时间字符串</span><br><span class="line">NSString *time = @<span class="string">"20110826134106"</span>;</span><br><span class="line">NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>DateFormat:@<span class="string">"yyyyMMddHHmmss"</span>];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>Locale:[[NSLocale alloc] initWithLocaleIdentifier:@<span class="string">"en_US_POSIX"</span>]];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>TimeZone:[NSTimeZone timeZoneWithName:@<span class="string">"GMT"</span>]];</span><br><span class="line">NSDate *date = [dateFormatter dateFromString:time];</span><br><span class="line">NSLog(@<span class="string">"date:%@"</span>,date);    </span><br><span class="line">[dateFormatter <span class="built_in">set</span>DateFormat:@<span class="string">"EEE, yyyy-MM-dd HH:mm:ss"</span>]; </span><br><span class="line">NSString *string = [dateFormatter stringFromDate:date];</span><br><span class="line">NSLog(@<span class="string">"string:%@"</span>,string);</span><br><span class="line"></span><br><span class="line">// 将Wed, 05 May 2011 10:50:00 +0800转换成特定的时间字符串</span><br><span class="line"> NSString *time = @<span class="string">"Wed, 05 May 2011 10:50:00 +0800"</span>;</span><br><span class="line"> NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>DateFormat:@<span class="string">"EEE, dd MM yyyy HH:mm:ss ZZZ"</span>];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>Locale:[[NSLocale alloc] initWithLocaleIdentifier:@<span class="string">"en_US_POSIX"</span>]];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>TimeZone:[NSTimeZone systemTimeZone]];</span><br><span class="line">NSDate *date = [dateFormatter dateFromString:time];   </span><br><span class="line">NSLog(@<span class="string">"date:%@"</span>,date);    </span><br><span class="line">[dateFormatter <span class="built_in">set</span>DateFormat:@<span class="string">"EEE, yyyy-MM-dd HH:mm:ss"</span>];</span><br><span class="line">NSString *string = [dateFormatter stringFromDate:date]; </span><br><span class="line">NSLog(@<span class="string">"string:%@"</span>,string);</span><br><span class="line"></span><br><span class="line">// 获取年、月、日、星期等</span><br><span class="line">NSString *time = @<span class="string">"2016-06-01 11:00:00"</span>;</span><br><span class="line">NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>DateFormat:@<span class="string">"yyyy-MM-dd HH:mm:ss"</span>];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>Locale:[[NSLocale alloc] initWithLocaleIdentifier:@<span class="string">"en_US_POSIX"</span>]];</span><br><span class="line">[dateFormatter <span class="built_in">set</span>TimeZone:[NSTimeZone timeZoneWithName:@<span class="string">"GMT"</span>]];</span><br><span class="line">NSDate *date = [dateFormatter dateFromString:time];</span><br><span class="line">NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];</span><br><span class="line">NSDateComponents *comps = [[NSDateComponents alloc] init];</span><br><span class="line">NSInteger unitFlags = NSYearCalendarUnit |NSMonthCalendarUnit |NSDayCalendarUnit |NSWeekdayCalendarUnit |NSHourCalendarUnit |NSMinuteCalendarUnit |NSSecondCalendarUnit;</span><br><span class="line">comps = [calendar components:unitFlags fromDate:date];</span><br><span class="line">NSInteger week = [comps weekday];</span><br><span class="line">NSInteger year = [comps year];</span><br><span class="line">NSInteger month = [comps month];</span><br><span class="line">NSInteger day = [comps day];</span><br><span class="line"></span><br><span class="line">// 判断日期是否在本周内</span><br><span class="line">-(BOOL)isDateThisWeek:(NSDate *)date &#123;</span><br><span class="line">    </span><br><span class="line">    NSDate *start;</span><br><span class="line">    NSTimeInterval extends;</span><br><span class="line">    </span><br><span class="line">    NSCalendar *cal=[NSCalendar autoupdatingCurrentCalendar];</span><br><span class="line">    NSDate *today=[NSDate date];</span><br><span class="line">    </span><br><span class="line">    BOOL success= [cal rangeOfUnit:NSWeekCalendarUnit startDate:&amp;start interval: &amp;extends <span class="keyword">for</span>Date:today];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(!success)</span><br><span class="line">        <span class="built_in">return</span> NO;</span><br><span class="line">    </span><br><span class="line">    NSTimeInterval dateInSecs = [date timeIntervalSinceReferenceDate];</span><br><span class="line">    NSTimeInterval dayStartInSecs= [start timeIntervalSinceReferenceDate];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(dateInSecs &gt; dayStartInSecs &amp;&amp; dateInSecs &lt; (dayStartInSecs+extends))&#123;</span><br><span class="line">        <span class="built_in">return</span> YES;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">return</span> NO;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">比较两个日期相差多少时，一般使用时间戳进行比较。（如果你有更好的方法，欢迎分享一下）</span><br><span class="line"></span><br><span class="line">NSDateFormatter创建比较慢，最好使用单例。</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得写的不错，那就打赏一下吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/weixin.png" alt="东折 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/13/iOS 开发中一些实用小代码/" rel="next" title="iOS 开发中一些实用小代码">
+                <i class="fa fa-chevron-left"></i> iOS 开发中一些实用小代码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/18/iOS Bug 汇总/" rel="prev" title="iOS Bug 汇总">
+                iOS Bug 汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/18/iOS时间格式转换总结/"
+           data-title="iOS时间格式转换总结" data-url="http://yoursite.com/2016/05/18/iOS时间格式转换总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="东折" />
+          <p class="site-author-name" itemprop="name">东折</p>
+           
+              <p class="site-description motion-element" itemprop="description">君子见大水必观焉，何也？-- 其万折也必东，似志 ！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UTC、GMT和时间戳简介"><span class="nav-number">1.</span> <span class="nav-text">UTC、GMT和时间戳简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GMT"><span class="nav-number">1.1.</span> <span class="nav-text">GMT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UTC"><span class="nav-number">1.2.</span> <span class="nav-text">UTC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间戳"><span class="nav-number">1.3.</span> <span class="nav-text">时间戳</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码部分"><span class="nav-number">2.</span> <span class="nav-text">代码部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间处理类简介"><span class="nav-number">2.1.</span> <span class="nav-text">时间处理类简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符说明"><span class="nav-number">2.2.</span> <span class="nav-text">字符说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式显示"><span class="nav-number">2.3.</span> <span class="nav-text">格式显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用实例"><span class="nav-number">2.4.</span> <span class="nav-text">使用实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">东折</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yulncbd"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
